@@ -1,0 +1,12 @@
+#icon {
+  font-size: 86px;
+}
+
+#group {
+  display: inline-block;
+  border-radius: 1rem !important;
+}
+
+#group-2 {
+  border-radius: 0rem 0rem 1rem 1rem !important;
+}
