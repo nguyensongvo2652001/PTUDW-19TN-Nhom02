@@ -1,0 +1,29 @@
+.footer {
+    height: 200px;
+    background-color: rgb(211, 211, 211);
+}
+
+.footer hr{
+    position: relative;
+    top:8px;
+    margin: auto;
+    margin-bottom: 24px;
+    width: 60%;
+    height: 4px;
+}
+
+.footer .companyInfor{
+    float: left;
+    color:black;
+    font-weight: bold;
+    width: 40%;
+    margin-bottom: 24px;
+}
+
+.footer .webCopyright{
+    margin-right: 20%;
+    float: right;
+    color:black;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
