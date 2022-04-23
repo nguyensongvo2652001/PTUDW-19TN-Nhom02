@@ -17,9 +17,16 @@ h1 {
     padding: 10px 45px;
     border-radius: 0;
     font-weight: bold;
-    margin-left: 200px;
+   
+}
+
+@media (min-width: 576px) {
+    .btn--add {
+        margin-left: 200px;
+    }
     
 }
+
 .pageChanger{
     margin-bottom:24px;
     margin-top: 12px;
