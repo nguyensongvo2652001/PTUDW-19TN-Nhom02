@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Lora";
+  font-weight: 400;
+}
+
+.header-tertiary {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
