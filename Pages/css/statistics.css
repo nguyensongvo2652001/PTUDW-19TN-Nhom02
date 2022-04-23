@@ -1,0 +1,14 @@
+.title {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+}
+
+.name {
+  font-size: 18px !important;
+  font-weight: 400 !important;
+}
+
+.value {
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
