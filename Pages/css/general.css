@@ -9,3 +9,7 @@ body {
   font-weight: 400;
 }
 
+.header-tertiary {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
