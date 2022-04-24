@@ -20,7 +20,7 @@ const clickElement = (el, link) => {
   });
 };
 
-clickElement(headerHomeIcon, "");
+clickElement(headerHomeIcon, "/");
 clickElement(headerProfileIcon, "profilePage.html");
 clickElement(headerCartIcon, "checkOutPage.html");
 clickElement(productProfileLink, "profilePage.html");
