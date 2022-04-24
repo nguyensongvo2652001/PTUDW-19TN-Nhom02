@@ -1,0 +1,71 @@
+.profilePageName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    font-size: 44px;
+    font-weight: bold;
+    color: rgb(164, 153, 102);
+}
+
+.profileMainBanner{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    background-color: rgb(222, 226, 230);
+}
+
+.profileMainBoard {
+    background-color: white;
+    border-radius: 24px;
+}
+
+.profileContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.formProfile{
+    width: 60%;
+    font-weight: bold;
+}
+
+.formProfile div{
+    margin-bottom: 16px;
+}
+
+.avatarField{
+    width: 80%;
+}
+
+.saveButtonDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.saveButton {
+    margin-top: 12px;
+    height: 60px;
+    font-size: 30px;
+    width:30%;
+}
+
+
+
+@media only screen and (max-width: 800px) {
+    .profileMainBanner {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .avatarField input{
+        font-size: 2vw;
+    }
+
+
+    .saveButton{
+        font-size: 3vw;
+    }
+}
+
