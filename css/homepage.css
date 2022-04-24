@@ -41,3 +41,7 @@
   color: #adb5bd;
   font-weight: 500;
 }
+
+.homepage-product__seller {
+  cursor: pointer;
+}

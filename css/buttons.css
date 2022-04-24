@@ -27,7 +27,7 @@
 
 .btn--black {
   color: #f8f9fa;
-  background-color: #3f3f3f;
+  background-color: #3f3f3f !important;
 }
 
 .btn--black:hover,

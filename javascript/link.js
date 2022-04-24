@@ -12,9 +12,11 @@ const profitProfileLink = document.querySelector(
 );
 const loginLinkButton = document.querySelector(".header__auth-button--login");
 const signupLinkButton = document.querySelector(".header__auth-button--signup");
+const sellerLinks = document.querySelectorAll(".homepage-product__seller");
 
 const clickElement = (el, link) => {
   if (!el) return;
+
   el.addEventListener("click", function () {
     location.href = link;
   });
@@ -22,9 +24,12 @@ const clickElement = (el, link) => {
 
 clickElement(headerHomeIcon, "/");
 clickElement(headerProfileIcon, "profilePage.html");
-clickElement(headerCartIcon, "checkOutPage.html");
+clickElement(headerCartIcon, "cart.html");
 clickElement(productProfileLink, "profilePage.html");
 clickElement(productManagerProfileLink, "productManager.html");
 clickElement(profitProfileLink, "statistics.html");
 clickElement(loginLinkButton, "Login.html");
 clickElement(signupLinkButton, "Signup.html");
+sellerLinks.forEach((sellerLink) =>
+  clickElement(sellerLink, "sellerProfile.html")
+);
