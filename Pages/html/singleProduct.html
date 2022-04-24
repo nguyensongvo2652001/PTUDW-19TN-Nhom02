@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Item</title>
+
+    <!--Lora Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--Scripts and stylesheets-->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    <link rel="stylesheet" href="../css/general.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/buttons.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/detail-item.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__content">
+        <p class="header__shop-name">Kim Bien</p>
+        <div class="header__search-bar">
+          <input
+            class="header__input"
+            type="text"
+            placeholder="Search an item"
+          />
+          <ion-icon name="search-outline" class="header__icon"></ion-icon>
+        </div>
+
+        <ul class="header__icons">
+          <li class="header__icon-container">
+            <ion-icon
+              name="person-outline"
+              class="header__icon header__icon--inactive"
+            ></ion-icon>
+          </li>
+
+          <li class="header__icon-container">
+            <ion-icon
+              name="basket-outline"
+              class="header__icon header__icon--inactive"
+            ></ion-icon>
+          </li>
+
+          <li class="header__icon-container">
+            <ion-icon name="heart-outline" class="header__icon"></ion-icon>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="single-product__title">
+        <p class="single-product__category">Product</p>
+        <p class="single-product__name">My Product</p>
+      </section>
+      <section class="basic-info">
+        <div class="basic-info__image-container">
+          <img
+            src="../images/item-1.jpg"
+            alt="image of item"
+            class="basic-info__image"
+          />
+        </div>
+        <div class="basic-info__content-container">
+          <p class="basic-info__category">THỜI TRANG</p>
+          <p class="basic-info__item-name">Túi xách</p>
+          <div class="basic-info__shop-name-container">
+            <ion-icon
+              name="person"
+              class="basic-info__shop-name-icon"
+            ></ion-icon>
+            <p class="basic-info__shop-name">TÊN CỬA HÀNG</p>
+          </div>
+          <p class="basic-info__intro">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nobis
+            voluptatem eligendi vero ab vel assumenda eius, repudiandae tempora,
+            inventore debitis eveniet eum qui asperiores iusto unde omnis
+            dolores ipsum vitae?
+          </p>
+          <div class="basic-info__price-container">
+            <p class="basic-info__price">$699</p>
+          </div>
+          <div class="basic-info__sold-container">
+            <p class="basic-info__sold-number"><span>SOLD: </span> 69</p>
+          </div>
+          <div class="basic-info__buttons-container">
+            <button class="btn btn--black">Edit</button>
+          </div>
+        </div>
+      </section>
+      <section class="detail">
+        <h3 class="header-tertiary">CHI TIẾT SẢN PHẨM</h3>
+        <p class="detail__content">
+          <span>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto magni
+            nobis laboriosam exercitationem quam aliquam iure facere totam sequi
+            eveniet, repellat, ut, odio sint accusamus itaque quidem eum illo
+            et.
+          </span>
+
+          <span
+            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
+            cupiditate soluta odio quaerat officia, veniam, ea maiores totam
+            doloribus quae quam vel libero, delectus placeat numquam illo
+            nostrum natus. Eos.</span
+          >
+
+          <span>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
+            totam esse, ea illo tenetur dolorem optio quas nulla ullam, neque
+            ipsam illum sed voluptatem. Esse ad adipisci architecto qui rerum?
+          </span>
+        </p>
+      </section>
+    </main>
+
+    <footer class="footer container-fluid">
+      <hr />
+      <p class="companyInfor">
+        Cong ty co phan thuong mai mot thanh vien<br />
+        Web ban hang Kim Bien
+      </p>
+      <p class="webCopyright">Copyright &copy; 2022 by group02</p>
+    </footer>
+  </body>
+</html>
