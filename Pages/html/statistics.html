@@ -58,12 +58,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
     <!-- My script -->
+    <script src="../javascript/link.js" defer></script>
 
     <title>Statistics</title>
   </head>
   <body>
     <!-- Header -->
-    <header class="header mb-3">
+    <header class="header">
       <div class="header__content">
         <p class="header__shop-name">Kim Bien</p>
         <div class="header__search-bar">
@@ -79,19 +80,22 @@
           <li class="header__icon-container">
             <ion-icon
               name="person-outline"
-              class="header__icon header__icon--inactive"
+              class="header__icon header__profile-icon header__icon--inactive"
             ></ion-icon>
           </li>
 
           <li class="header__icon-container">
             <ion-icon
               name="basket-outline"
-              class="header__icon header__icon--inactive"
+              class="header__icon header__icon--inactive header__cart-icon"
             ></ion-icon>
           </li>
 
-          <li class="header__icon-container">
-            <ion-icon name="heart-outline" class="header__icon"></ion-icon>
+          <li class="header__icon-container header__home-icon">
+            <ion-icon
+              name="home-outline"
+              class="header__icon header__icon--inactive"
+            ></ion-icon>
           </li>
         </ul>
       </div>
@@ -101,56 +105,37 @@
       <section class="section-content py-3">
         <div class="row">
           <aside class="col-lg-3">
-            <nav class="sidebar py-2 mb-4">
+            <nav class="sidebar pb-2 my-4">
               <ul class="nav flex-column px-4" id="nav_accordion">
                 <li class="nav-item">
                   <a
-                    class="nav-link d-flex justify-content-between"
+                    class="nav-link d-flex justify-content-between profile__product-profile-link"
                     data-bs-toggle="collapse"
                     data-bs-target="#menu_item1"
                     href="#"
                   >
-                    Profile <ion-icon name="chevron-down-outline"></ion-icon>
+                    Profile
                   </a>
-                  <ul id="menu_item1" class="submenu collapse">
-                    <li><a class="nav-link" href="#">Submenu item 1 </a></li>
-                    <li><a class="nav-link" href="#">Submenu item 2 </a></li>
-                    <li><a class="nav-link" href="#">Submenu item 3 </a></li>
-                  </ul>
                 </li>
                 <li class="nav-item">
                   <a
-                    class="nav-link d-flex justify-content-between"
+                    class="nav-link d-flex justify-content-between profile__product-manager-link"
                     data-bs-toggle="collapse"
                     data-bs-target="#menu_item2"
                     href="#"
                   >
                     Product Manager
-                    <ion-icon name="chevron-down-outline"></ion-icon
-                  ></a>
-                  <ul id="menu_item2" class="submenu collapse">
-                    <li><a class="nav-link" href="#">Submenu item 4 </a></li>
-                    <li><a class="nav-link" href="#">Submenu item 5 </a></li>
-                    <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                    <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                  </ul>
+                  </a>
                 </li>
                 <li class="nav-item">
                   <a
-                    class="nav-link d-flex justify-content-between"
+                    class="nav-link d-flex justify-content-between profile__product-profit-link"
                     data-bs-toggle="collapse"
                     data-bs-target="#menu_item3"
                     href="#"
                   >
                     Profit summary
-                    <ion-icon name="chevron-down-outline"></ion-icon
-                  ></a>
-                  <ul id="menu_item3" class="submenu collapse">
-                    <li><a class="nav-link" href="#">Submenu item 4 </a></li>
-                    <li><a class="nav-link" href="#">Submenu item 5 </a></li>
-                    <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                    <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                  </ul>
+                  </a>
                 </li>
               </ul>
             </nav>

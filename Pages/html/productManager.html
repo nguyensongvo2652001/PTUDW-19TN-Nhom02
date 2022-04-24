@@ -25,6 +25,7 @@
     ></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"crossorigin="anonymous"></script>
+    <script src="../javascript/link.js" defer></script>
 
     <link rel="stylesheet" href="../../Components/css/general.css" />
     <link rel="stylesheet" href="../../Components/css/header.css" />
@@ -49,58 +50,64 @@
           <li class="header__icon-container">
             <ion-icon
               name="person-outline"
-              class="header__icon header__icon--inactive"
+              class="header__icon header__profile-icon header__icon--inactive"
             ></ion-icon>
           </li>
 
           <li class="header__icon-container">
             <ion-icon
               name="basket-outline"
-              class="header__icon header__icon--inactive"
+              class="header__icon header__icon--inactive header__cart-icon"
             ></ion-icon>
           </li>
 
-          <li class="header__icon-container">
-            <ion-icon name="heart-outline" class="header__icon"></ion-icon>
+          <li class="header__icon-container header__home-icon">
+            <ion-icon
+              name="home-outline"
+              class="header__icon header__icon--inactive"
+            ></ion-icon>
           </li>
         </ul>
       </div>
     </header>
         <section class="section-content py-3">
     <div class="row">
-        <aside class="col-lg-3"> 
-            <nav class="sidebar py-3 mb-4">
-            <ul class="nav flex-column" id="nav_accordion">
-                <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between mr-5" data-bs-toggle="collapse" data-bs-target="#menu_item1" href="#"> Profile <ion-icon name="chevron-down-outline"></ion-icon> </a>
-                    <ul id="menu_item1" class="submenu collapse" >
-                        <li><a class="nav-link" href="#">Submenu item 1 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 2 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 3 </a> </li>
-                    </ul>
-
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#menu_item2" href="#"> Product Manager <ion-icon name="chevron-down-outline"></ion-icon></a>
-                    <ul id="menu_item2" class="submenu collapse" >
-                        <li><a class="nav-link" href="#">Submenu item 4 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 5 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between" data-bs-toggle="collapse" data-bs-target="#menu_item3" href="#"> Profit summary <ion-icon name="chevron-down-outline"></ion-icon></a>
-                    <ul id="menu_item3" class="submenu collapse" >
-                        <li><a class="nav-link" href="#">Submenu item 4 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 5 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                        <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-                    </ul>
-                </li>
-            </ul>
-            </nav>
-        </aside>
+      <aside class="col-lg-3">
+        <nav class="sidebar pb-2 my-4">
+          <ul class="nav flex-column px-4" id="nav_accordion">
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex justify-content-between profile__product-profile-link"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu_item1"
+                href="#"
+              >
+                Profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex justify-content-between profile__product-manager-link"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu_item2"
+                href="#"
+              >
+                Product Manager
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link d-flex justify-content-between profile__product-profit-link"
+                data-bs-toggle="collapse"
+                data-bs-target="#menu_item3"
+                href="#"
+              >
+                Profit summary
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
         <main class="col-lg-9">
           <div class="content">
             <p>Product</p>
