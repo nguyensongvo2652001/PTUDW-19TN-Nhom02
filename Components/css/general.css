@@ -8,3 +8,8 @@ body {
   font-family: "Lora";
   font-weight: 400;
 }
+
+.header * {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}

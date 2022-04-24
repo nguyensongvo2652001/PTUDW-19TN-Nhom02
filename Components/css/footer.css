@@ -1,6 +1,8 @@
 .footer {
-    height: 200px;
+    height: 120px;
     background-color: rgb(211, 211, 211);
+    padding: 0rem 1.5rem !important;
+
 }
 
 .footer hr{
@@ -10,6 +12,7 @@
     margin-bottom: 48px;
     width: 60%;
     height: 4px;
+    
 }
 
 .footer .companyInfor{
