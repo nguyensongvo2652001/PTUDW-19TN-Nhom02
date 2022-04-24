@@ -1,6 +1,6 @@
 {
   "post-install-cmd": [
     "php artisan clear-compiled",
-    "chmod -R 777 Pages/html/"
+    "chmod -R 777 Pages/html"
   ]
 }
