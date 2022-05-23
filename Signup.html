@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Signup</title>
 
     <!--Lora Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,8 +15,7 @@
     />
 
     <!--Scripts and stylesheets-->
-    <script src="../javascript/link.js" defer></script>
-
+    <script src="./javascript/link.js" defer></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -27,22 +26,22 @@
       crossorigin="anonymous"
     ></script>
 
-    <link rel="stylesheet" href="../../Components/css/general.css" />
-    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="./Components/css/general.css" />
+    <link rel="stylesheet" href="./css/login.css" />
   </head>
   <body>
     <div class="row">
       <div class="col-lg-5 left">
         <img
-          class="thumbnail img-fluid"
-          src="https://picsum.photos/800/1080"
+          class="thumbnail"
+          src="https://picsum.photos/1000/1200"
           alt="Login image"
         />
       </div>
       <div class="col-lg-7 right">
         <div class="content">
           <div class="brand">KIM BIEN</div>
-          <div class="slogan">Everything you need and more!</div>
+          <div class="slogan mb-5">Everything you need and more!</div>
 
           <form>
             <label for="InputUsername" class="form-label"> Username </label>
@@ -51,15 +50,24 @@
             <label for="InputPassword" class="form-label"> Password </label>
             <input
               type="password"
-              class="mb-5 form-control"
+              class="mb-4 form-control"
               id="InputPassword"
             />
-            <button type="submit" class="btn text-white lgbtn">Login</button>
+
+            <label for="ConfirmPassword" class="form-label">
+              Confirm password
+            </label>
+            <input
+              type="password"
+              class="mb-5 form-control"
+              id="ConfirmPassword"
+            />
+            <button type="submit" class="btn text-white lgbtn">Sign Up</button>
           </form>
 
           <hr />
           <div class="text-center">
-            <a class="btn subtn" href="./Signup.html">Create new account</a>
+            <a class="btn subtn" href="./Login.html">Login</a>
           </div>
         </div>
       </div>

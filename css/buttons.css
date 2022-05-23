@@ -32,8 +32,7 @@
 
 .btn--black:hover,
 .btn--black:active {
-  background-color: #323232 !important;
-  color: #fff;
+  background-color: #323232;
 }
 
 .btn--black-border {

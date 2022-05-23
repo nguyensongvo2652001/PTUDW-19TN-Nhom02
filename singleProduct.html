@@ -23,13 +23,13 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
-    <script src="../javascript/link.js" defer></script>
+    <script src="./javascript/link.js" defer></script>
 
-    <link rel="stylesheet" href="../css/general.css" />
-    <link rel="stylesheet" href="../css/header.css" />
-    <link rel="stylesheet" href="../css/buttons.css" />
-    <link rel="stylesheet" href="../css/footer.css" />
-    <link rel="stylesheet" href="../css/detail-item.css" />
+    <link rel="stylesheet" href="./css/general.css" />
+    <link rel="stylesheet" href="./css/header.css" />
+    <link rel="stylesheet" href="./css/buttons.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
+    <link rel="stylesheet" href="./css/detail-item.css" />
   </head>
   <body>
     <header class="header">
@@ -44,17 +44,40 @@
           <ion-icon name="search-outline" class="header__icon"></ion-icon>
         </div>
 
-        <div class="header__auth-container">
-          <p class="header__auth-button header__auth-button--login">Login</p>
-          <p class="header__auth-button header__auth-button--signup">Signup</p>
-        </div>
+        <ul class="header__icons">
+          <li class="header__icon-container">
+            <ion-icon
+              name="person-outline"
+              class="header__icon header__profile-icon header__icon--inactive"
+            ></ion-icon>
+          </li>
+
+          <li class="header__icon-container">
+            <ion-icon
+              name="basket-outline"
+              class="header__icon header__icon--inactive header__cart-icon"
+            ></ion-icon>
+          </li>
+
+          <li class="header__icon-container header__home-icon">
+            <ion-icon
+              name="home-outline"
+              class="header__icon header__icon--inactive"
+            ></ion-icon>
+          </li>
+        </ul>
       </div>
     </header>
+
     <main class="container">
+      <section class="single-product__title">
+        <p class="single-product__category">Product</p>
+        <p class="single-product__name">My Product</p>
+      </section>
       <section class="basic-info">
         <div class="basic-info__image-container">
           <img
-            src="../images/item-1.jpg"
+            src="./images/item-1.jpg"
             alt="image of item"
             class="basic-info__image"
           />
@@ -77,24 +100,12 @@
           </p>
           <div class="basic-info__price-container">
             <p class="basic-info__price">$699</p>
-            <div class="basic-info__counter">
-              <button class="basic-info__counter-btn basic-info__counter-minus">
-                -
-              </button>
-              <input
-                class="basic-info__counter-input"
-                type="number"
-                value="1"
-                required
-              />
-              <button class="basic-info__counter-btn basic-info__counter-plus">
-                +
-              </button>
-            </div>
+          </div>
+          <div class="basic-info__sold-container">
+            <p class="basic-info__sold-number"><span>SOLD: </span> 69</p>
           </div>
           <div class="basic-info__buttons-container">
-            <button class="btn btn--black">Add To Cart</button>
-            <button class="btn btn--black-border">Add To Wishlist</button>
+            <button class="btn btn--black">Edit</button>
           </div>
         </div>
       </section>
