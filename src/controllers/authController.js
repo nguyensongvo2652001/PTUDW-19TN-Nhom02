@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
@@ -62,4 +64,44 @@ const signUp = catchAsync(async (req, res, next) => {
   createAndSendToken({ user, req, res, statusCode: 201 });
 });
 
-module.exports = { signUp, login };
+const protect = catchAsync(async (req, res, next) => {
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  )
+    token = req.headers.authorization.split(" ")[1];
+  token = token || req.cookies.jwt;
+
+  if (!token) {
+    return next(new AppError("Please log in to perform this action", 401));
+  }
+
+  const decoded = await promisify(jwt.verify)(
+    token,
+    process.env.JWT_SECRET_KEY
+  );
+
+  const user = await User.findById(decoded.id).select("+passwordChangedAt");
+
+  if (!user)
+    return next(new AppError("No users found with the specified token", 400));
+
+  const changedPasswordAfter = user.changedPasswordAfter(
+    user.passwordChangedAt,
+    decoded.iat
+  );
+
+  if (changedPasswordAfter)
+    return next(
+      new AppError(
+        "Users with this token already changed their password. Please login again",
+        400
+      )
+    );
+
+  req.user = user;
+  next();
+});
+
+module.exports = { signUp, login, protect };

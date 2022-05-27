@@ -23,7 +23,10 @@ const userSchema = new mongoose.Schema({
     },
     select: false,
   },
-
+  passwordChangedAt: {
+    type: Date,
+    select: false,
+  },
   storeName: {
     type: String,
     maxlength: [50, "Your store name is too long"],
@@ -69,6 +72,11 @@ userSchema.methods.verifyPassword = async (
   } catch (e) {
     throw new Error(e);
   }
+};
+
+userSchema.methods.changedPasswordAfter = function (passwordChangedAt, date) {
+  if (!passwordChangedAt) return false;
+  return passwordChangedAt.getTime() > date * 1000;
 };
 /**********************************/
 
