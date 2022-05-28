@@ -31,6 +31,10 @@ const handleValidationError = (err) => {
   return new AppError(message, 400);
 };
 
+const handleInvalidObjectIdError = (err) => {
+  return new AppError("Invalid id, please try another one", 400);
+};
+
 const errorController = (err, req, res, next) => {
   //In case the error is not operational
   let error = { ...err };
@@ -41,6 +45,7 @@ const errorController = (err, req, res, next) => {
 
   if (error.code === 11000) error = handleDuplicateFieldError(error);
   if (error.name === "ValidationError") error = handleValidationError(error);
+  if (error.kind === "ObjectId") error = handleInvalidObjectIdError(error);
 
   if (process.env.MODE === "DEBUG") handleErrorDebug(error, req, res);
   if (process.env.MODE === "PROD") handleErrorProd(error, req, res);

@@ -28,7 +28,6 @@ const productSchema = new mongoose.Schema({
   },
   thumbnail: {
     type: String,
-    required: [true, "Product must have thumbnail"],
   },
   dateAdded: {
     type: Date,
@@ -38,6 +37,13 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Product must belong to a category"],
   },
+});
+
+// QUERY MIDDLEWARES
+//Populate seller field for product
+productSchema.pre(/^find/, async function (next) {
+  this.populate("seller", "username storeName");
+  next();
 });
 
 const Product = mongoose.model("Product", productSchema);
