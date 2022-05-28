@@ -37,6 +37,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, "Product must belong to a category"],
   },
+  forSale: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 // QUERY MIDDLEWARES
