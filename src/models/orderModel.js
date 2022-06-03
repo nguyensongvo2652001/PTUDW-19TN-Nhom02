@@ -44,11 +44,15 @@ const checkoutSchema = new mongoose.Schema({
   },
 });
 
-const orderItemSchema = new mongoose.Schema({
+const orderedProductSchema = new mongoose.Schema({
   order: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Order",
     required: [true, "Order item must belong to an order"],
+  },
+  dateOrdered: {
+    type: Date,
+    default: Date.now,
   },
   product: {
     type: mongoose.Schema.Types.ObjectId,
@@ -64,11 +68,16 @@ const orderItemSchema = new mongoose.Schema({
       message: "Number of products bought must be larger than 0",
     },
   },
+  buyer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: [true, "Order item must belong to a buyer"],
+  },
 });
 
 /*QUERY MIDDLEWARE */
 //Populate product field
-orderSchema.pre(/^find/, async function (next) {
+orderedProductSchema.pre(/^find/, async function (next) {
   this.populate("product", "name price seller thumbnail dateAdded");
   next();
 });
@@ -102,17 +111,18 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-/*DOCUMENT MIDDLEWARE */
-//Calculate total price before save
-orderSchema.pre("save", async function (next) {
-  const orderItems = await OrderItem.find({ orderId: this._id });
-  const productsPrice = orderItems.reduce(
-    (acc, orderItem) => acc + orderItem.product.price * orderItem.count,
+/*INSTANCE METHODS */
+//Calculate total price
+orderSchema.methods.calculateTotalPrice = async function () {
+  const orderedProducts = await OrderedProduct.find({ order: this._id });
+  const productsPrice = orderedProducts.reduce(
+    (acc, orderedProduct) =>
+      acc + orderedProduct.product.price * orderedProduct.count,
     0
   );
-  this.totalPrice = this.transportPrice + this.surcharge + productsPrice;
-  next();
-});
+  return this.transportPrice + this.surcharge + productsPrice;
+};
+
 /*************************************/
 
 orderSchema.virtual("checkout", {
@@ -128,7 +138,7 @@ orderSchema.virtual("orderItems", {
 });
 
 const Order = mongoose.model("Order", orderSchema);
-const OrderItem = mongoose.model("OrderItem", orderItemSchema);
+const OrderedProduct = mongoose.model("OrderedProduct", orderedProductSchema);
 const Checkout = mongoose.model("Checkout", checkoutSchema);
 
-module.exports = { Order, OrderItem, Checkout };
+module.exports = { Order, OrderedProduct, Checkout };

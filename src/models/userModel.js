@@ -44,6 +44,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "default.jpg",
   },
+  account: {
+    type: Number,
+    default: 0,
+  },
 });
 
 //DOCUMENT MIDDLEWARES
