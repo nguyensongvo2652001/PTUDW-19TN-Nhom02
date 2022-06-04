@@ -44,43 +44,56 @@ const checkoutSchema = new mongoose.Schema({
   },
 });
 
-const orderedProductSchema = new mongoose.Schema({
-  order: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Order",
-    required: [true, "Order item must belong to an order"],
-  },
-  dateOrdered: {
-    type: Date,
-    default: Date.now,
-  },
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Product",
-    required: [true, "Order item must be one of the product"],
-  },
-  count: {
-    type: Number,
-    validate: {
-      validator: function (value) {
-        return value > 0;
+const orderedProductSchema = new mongoose.Schema(
+  {
+    order: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Order",
+      required: [true, "Order item must belong to an order"],
+    },
+    dateOrdered: {
+      type: Date,
+      default: Date.now,
+    },
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      required: [true, "Order item must be one of the product"],
+    },
+    count: {
+      type: Number,
+      validate: {
+        validator: function (value) {
+          return value > 0;
+        },
+        message: "Number of products bought must be larger than 0",
       },
-      message: "Number of products bought must be larger than 0",
+    },
+    buyer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "Order item must belong to a buyer"],
+    },
+    totalPrice: {
+      type: Number,
     },
   },
-  buyer: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: [true, "Order item must belong to a buyer"],
-  },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 /*QUERY MIDDLEWARE */
 //Populate product field
 orderedProductSchema.pre(/^find/, async function (next) {
-  this.populate("product", "name price seller thumbnail dateAdded");
+  this.populate("product", "name price seller thumbnail dateAdded forSale");
   next();
 });
+
+orderedProductSchema.methods.calculateTotalPrice = function () {
+  return this.count * this.product.price;
+};
 
 const orderSchema = new mongoose.Schema(
   {

@@ -5,6 +5,7 @@ const errorController = require("./controllers/errorController");
 const userRouter = require("./routers/userRouter");
 const productRouter = require("./routers/productRouter");
 const orderRouter = require("./routers/orderRouter");
+const searchRouter = require("./routers/searchRouter");
 const AppError = require("./utils/appError");
 
 const app = express();
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json({ limit: process.env.MAX_REQUEST_BODY_SIZE }));
 app.use(cookieParser());
 
+app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/orders", orderRouter);

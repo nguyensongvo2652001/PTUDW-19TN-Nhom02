@@ -1,6 +1,18 @@
 const { Order, Checkout, OrderedProduct } = require("../models/orderModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
+const APIFeatures = require("../utils/apiFeatures");
+
+const clearOrders = async (order, checkout, orderedProducts) => {
+  await Order.findByIdAndDelete(order._id);
+  await Checkout.findByIdAndDelete(checkout._id);
+  await Promise.all(
+    orderedProducts.map(
+      async (orderedProduct) =>
+        await OrderedProduct.findByIdAndDelete(orderedProduct._id)
+    )
+  );
+};
 
 const createOrder = catchAsync(async (req, res, next) => {
   let orderData = req.body.order;
@@ -25,24 +37,35 @@ const createOrder = catchAsync(async (req, res, next) => {
   );
 
   orderedProducts = await Promise.all(
-    orderedProducts.map(
-      async (orderedProduct) =>
-        await OrderedProduct.findById(orderedProduct._id)
-    )
+    orderedProducts.map(async (orderedProduct) => {
+      const newOrderedProduct = await OrderedProduct.findById(
+        orderedProduct._id
+      );
+      newOrderedProduct.totalPrice = newOrderedProduct.calculateTotalPrice();
+      await newOrderedProduct.save();
+      return newOrderedProduct;
+    })
   );
+
+  const notForSaleOrderedProducts = orderedProducts.filter(
+    (orderedProduct) => !orderedProduct.product.forSale
+  );
+
+  if (notForSaleOrderedProducts.length > 0) {
+    await clearOrders(order, checkout, orderedProducts);
+    return next(
+      new AppError(
+        "Some of the products you chose are not for sale. Please remove them",
+        400
+      )
+    );
+  }
 
   order.totalPrice = await order.calculateTotalPrice();
   await order.save();
 
   if (order.totalPrice > req.user.account) {
-    await Order.findByIdAndDelete(order._id);
-    await Checkout.findByIdAndDelete(checkout._id);
-    await Promise.all(
-      orderedProducts.map(
-        async (orderedProduct) =>
-          await OrderedProduct.findByIdAndDelete(orderedProduct._id)
-      )
-    );
+    await clearOrders(order, checkout, orderedProducts);
     return next(
       new AppError("You don't have enough money to make this order", 400)
     );
@@ -61,4 +84,21 @@ const createOrder = catchAsync(async (req, res, next) => {
   });
 });
 
-module.exports = { createOrder };
+const getOrdersHistory = catchAsync(async (req, res, next) => {
+  if (!req.query.sort) req.query.sort = "-dateOrdered";
+  const features = new APIFeatures(
+    OrderedProduct.find({ buyer: req.user._id }),
+    req.query
+  )
+    .filter()
+    .sort();
+  const products = await features.queryObj;
+
+  res.status(200).json({
+    status: "success",
+    length: products.length,
+    data: { products },
+  });
+});
+
+module.exports = { createOrder, getOrdersHistory };

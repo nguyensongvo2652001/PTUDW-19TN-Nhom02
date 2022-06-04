@@ -84,7 +84,9 @@ const protect = catchAsync(async (req, res, next) => {
     process.env.JWT_SECRET_KEY
   );
 
-  const user = await User.findById(decoded.id).select("+passwordChangedAt");
+  const user = await User.findById(decoded.id).select(
+    "+passwordChangedAt +account"
+  );
 
   if (!user)
     return next(new AppError("No users found with the specified token", 400));

@@ -47,6 +47,7 @@ const userSchema = new mongoose.Schema({
   account: {
     type: Number,
     default: 0,
+    select: false,
   },
 });
 
