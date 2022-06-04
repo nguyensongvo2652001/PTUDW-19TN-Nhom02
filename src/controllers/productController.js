@@ -4,6 +4,7 @@ const sharp = require("sharp");
 const Product = require("../models/productModel");
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
+const APIFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const { filterObject } = require("../utils/helpers");
 
@@ -171,7 +172,11 @@ const updateProduct = catchAsync(async (req, res, next) => {
 });
 
 const getAllProducts = catchAsync(async (req, res, next) => {
-  const products = await Product.find(req.productsFilter).sort("-dateAdded");
+  const features = new APIFeatures(Product.find(req.productsFilter), req.query)
+    .filter()
+    .sort();
+
+  const products = await features.queryObj;
 
   res.status(200).json({
     status: "success",
