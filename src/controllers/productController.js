@@ -30,7 +30,7 @@ const resizeAndStoreThumbnail = async (product, buffer) => {
   const updatedProduct = await Product.findByIdAndUpdate(
     product._id,
     {
-      thumbnail: `product_${product._id}_thumbnail`,
+      thumbnail: `product_${product._id}_thumbnail.jpg`,
     },
     { new: true }
   );
@@ -39,9 +39,7 @@ const resizeAndStoreThumbnail = async (product, buffer) => {
   await sharp(buffer)
     .resize(500, 500)
     .jpeg({ quality: 80 })
-    .toFile(
-      `public/images/products/thumbnails/${updatedProduct.thumbnail}.jpg`
-    );
+    .toFile(`public/images/products/thumbnails/${updatedProduct.thumbnail}`);
 
   return updatedProduct;
 };

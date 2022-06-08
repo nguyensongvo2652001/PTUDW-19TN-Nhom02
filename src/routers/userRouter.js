@@ -9,15 +9,23 @@ const router = express.Router();
 router.post("/login", authController.login);
 router.post("/signUp", authController.signUp);
 
-router.patch(
-  "/me",
-  authController.protect,
-  userController.uploadAvatar,
-  userController.resizeAndStoreAvatar,
-  userController.updateMe
-);
+router
+  .route("/me")
+  .patch(
+    authController.protect,
+    userController.uploadAvatar,
+    userController.resizeAndStoreAvatar,
+    userController.updateMe
+  )
+  .get(
+    authController.protect,
+    userController.setCurrentUserId,
+    userController.getUser
+  );
 
-router.use("/:sellerId/products", productRouter);
+router.route("/:id").get(userController.getUser);
+
 router.use("/me/products", productRouter);
+router.use("/:sellerId/products", productRouter);
 
 module.exports = router;

@@ -19,7 +19,7 @@ dotenv.config({ path: "./env/config.env" });
 const app = require("./app");
 
 // Connect to database
-let databaseString = process.env.LOCAL_DB_STRING.replace(
+let databaseString = process.env.DB_STRING.replace(
   /<username>/,
   process.env.DB_USERNAME
 );

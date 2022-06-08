@@ -10,6 +10,8 @@ const AppError = require("./utils/appError");
 
 const app = express();
 
+app.use("/public", express.static(`${__dirname}/public`));
+
 app.use(express.json({ limit: process.env.MAX_REQUEST_BODY_SIZE }));
 app.use(cookieParser());
 

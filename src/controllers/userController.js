@@ -9,7 +9,8 @@ const { filterObject } = require("../utils/helpers");
 const setCurrentUserId = (req, res, next) => {
   //Use this middleware for route with "/me/..."
 
-  req.params.sellerId = req.user._id; //This is useful when we want to get all the products from the current user
+  req.params.sellerId = req.params.id = req.user._id; //This is useful when we want to get all the products from the current user
+
   next();
 };
 const storage = multer.memoryStorage();
@@ -31,6 +32,8 @@ const upload = multer({ storage, fileFilter });
 const uploadAvatar = upload.single("avatar");
 
 const resizeAndStoreAvatar = catchAsync(async (req, res, next) => {
+  console.log(req.file);
+
   if (!req.file) return next();
   const avatar = req.file.buffer;
   if (!avatar) return next();
@@ -43,9 +46,27 @@ const resizeAndStoreAvatar = catchAsync(async (req, res, next) => {
   next();
 });
 
+const getUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user)
+    return next(new AppError("Can not find the user with specified id", 404));
+
+  res.status(200).json({
+    status: "success",
+    data: { user },
+  });
+});
+
 const updateMe = catchAsync(async (req, res, next) => {
   req.body = filterObject(req.body, {
-    whiteList: ["username", "storeName", "phoneNumber", "avatar"],
+    whiteList: [
+      "username",
+      "storeName",
+      "phoneNumber",
+      "avatar",
+      "description",
+    ],
   });
 
   const user = await User.findByIdAndUpdate(req.user.id, req.body, {
@@ -64,4 +85,5 @@ module.exports = {
   uploadAvatar,
   resizeAndStoreAvatar,
   updateMe,
+  getUser,
 };
