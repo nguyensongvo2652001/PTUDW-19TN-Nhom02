@@ -175,14 +175,14 @@ const getAllProducts = catchAsync(async (req, res, next) => {
     .sort();
 
   const products = await features.queryObj;
-
-  res.status(200).json({
-    status: "success",
-    data: {
-      length: products.length,
-      products,
-    },
-  });
+  res.render("pages/authenticatedHomePage", { header: "header" });
+  // res.status(200).json({
+  //   status: "success",
+  //   data: {
+  //     length: products.length,
+  //     products,
+  //   },
+  // });
 });
 
 const getProduct = catchAsync(async (req, res, next) => {
