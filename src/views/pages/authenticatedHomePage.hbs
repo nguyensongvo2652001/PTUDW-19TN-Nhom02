@@ -6,19 +6,21 @@
         <p class="homepage__title">Products</p>
         <h3 class="header-tertiary">Products from KIM BIEN</h3>
         <ul class="homepage-products__grid">
+          {{#each products}}
           <li class="homepage-product__container">
             <img
               class="homepage-product__image"
               alt="product image"
-              src="/images/products/thumbnails/product_62a03a8ed98a4ad0f980ec82_thumbnail.jpg"
+              src="/images/products/thumbnails/{{this.thumbnail}}"
             />
             <a
               class="homepage-product__name"
               href="./authenticatedDetailItem.html"
-            >Item 1</a>
-            <p class="homepage-product__seller">Seller Name</p>
-            <p class="homepage-product__price">$1000</p>
+            >{{this.name}}</a>
+            <p class="homepage-product__seller">{{this.seller.username}}</p>
+            <p class="homepage-product__price">{{this.price}}</p>
           </li>
+          {{/each}}
         </ul>
       </section>
     </div>

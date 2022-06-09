@@ -15,7 +15,7 @@ module.exports = class APIFeatures {
       (match) => `$${match}`
     );
 
-    this.queryObj = this.queryObj.find(JSON.parse(queryStr));
+    this.queryObj = this.queryObj.find(JSON.parse(queryStr)).lean();
     return this;
   }
 

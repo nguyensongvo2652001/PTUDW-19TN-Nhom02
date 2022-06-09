@@ -175,7 +175,11 @@ const getAllProducts = catchAsync(async (req, res, next) => {
     .sort();
 
   const products = await features.queryObj;
-  res.render("pages/authenticatedHomePage", { header: "header" });
+  const data = {
+    header: "header",
+    products: products,
+  };
+  res.render("pages/authenticatedHomePage", data);
   // res.status(200).json({
   //   status: "success",
   //   data: {
@@ -186,17 +190,23 @@ const getAllProducts = catchAsync(async (req, res, next) => {
 });
 
 const getProduct = catchAsync(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.id).lean();
 
   if (!product)
     return next(new AppError("No products found with the specified id", 404));
 
-  res.status(200).json({
-    status: "success",
-    data: {
-      product,
-    },
-  });
+  const data = {
+    header: "header",
+    product: product,
+  };
+  res.render("pages/authenticatedDetailItem", data);
+  // console.log(product);
+  // res.status(200).json({
+  //   status: "success",
+  //   data: {
+  //     product,
+  //   },
+  // });
 });
 
 module.exports = {
