@@ -38,6 +38,7 @@ const handleInvalidObjectIdError = (err) => {
 const errorController = (err, req, res, next) => {
   //In case the error is not operational
   let error = { ...err };
+  console.log(err);
   error.message = err.message;
   error.statusCode = err.statusCode || 500;
   error.status = err.status || "error";
