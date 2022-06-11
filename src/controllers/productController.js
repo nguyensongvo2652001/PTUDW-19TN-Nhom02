@@ -170,7 +170,10 @@ const updateProduct = catchAsync(async (req, res, next) => {
 });
 
 const getAllProducts = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Product.find(req.productsFilter), req.query)
+  const features = new APIFeatures(
+    Product.find(req.productsFilter).lean(),
+    req.query
+  )
     .filter()
     .sort();
 
@@ -179,6 +182,7 @@ const getAllProducts = catchAsync(async (req, res, next) => {
     header: "header",
     products: products,
   };
+  console.log(products);
   res.render("pages/authenticatedHomePage", data);
   // res.status(200).json({
   //   status: "success",

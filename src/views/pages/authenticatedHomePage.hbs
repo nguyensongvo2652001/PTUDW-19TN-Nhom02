@@ -15,7 +15,7 @@
             />
             <a
               class="homepage-product__name"
-              href="./authenticatedDetailItem.html"
+              href="./{{this._id}}"
             >{{this.name}}</a>
             <p class="homepage-product__seller">{{this.seller.username}}</p>
             <p class="homepage-product__price">{{this.price}}</p>
@@ -26,3 +26,6 @@
     </div>
   </section>
 </main>
+<script>
+  console.log({{products}})
+</script>
