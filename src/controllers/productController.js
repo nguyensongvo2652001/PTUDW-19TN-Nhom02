@@ -183,7 +183,7 @@ const getAllProducts = catchAsync(async (req, res, next) => {
     products: products,
   };
   console.log(products);
-  res.render("pages/authenticatedHomePage", data);
+  res.render("partials/authenticatedHomePage", data);
   // res.status(200).json({
   //   status: "success",
   //   data: {
@@ -203,7 +203,7 @@ const getProduct = catchAsync(async (req, res, next) => {
     header: "header",
     product: product,
   };
-  res.render("pages/authenticatedDetailItem", data);
+  res.render("partials/authenticatedDetailItem", data);
   // console.log(product);
   // res.status(200).json({
   //   status: "success",
