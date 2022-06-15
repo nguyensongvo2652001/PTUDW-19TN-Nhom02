@@ -1,0 +1,49 @@
+    <div class="profilePage">
+      <div class="profilePageName">PROFILE</div>
+      <section class="profileMainBanner container-fluid row">
+        {{#if asideProfile}}
+        {{>asideProfile}}
+        {{/if}}
+
+        <div class="profileMainBoard m-4 col-lg-6">
+          <div class="profileContent m-4">
+            <div>
+              <div class="profile__avatar-container">
+                <img
+                  class="profile__avatar"
+                  src="/images/users/avatars/{{user.avatar}}"
+                  alt="user avatar"
+                />
+              </div>
+              <div class="profile__infos">
+                <p class="profile__store-name profile__info">
+                  <ion-icon name="person"></ion-icon> {{user.username}}
+                </p>
+                {{#if user.storeName}}
+                <p class="profile__store-name profile__info">
+                  <ion-icon name="storefront"></ion-icon> {{user.storeName}}
+                </p>
+                {{/if}}
+                {{#if user.phoneNumber}}
+                <p class="profile__phone-number profile__info">
+                  <ion-icon name="call"></ion-icon> {{user.phoneNumber}}
+                </p>
+                {{/if}}
+                {{#if user.description}}
+                <p class="profile__description">
+                  {{user.description}}
+                </p>
+                {{/if}}
+              </div>
+              {{#if editButton}}
+              <div class="profile__button-container">
+                <a class="btn btn--black" href="#"
+                  >Edit Profile</a
+                >
+              </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
