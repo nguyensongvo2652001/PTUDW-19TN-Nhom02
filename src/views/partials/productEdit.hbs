@@ -1,0 +1,41 @@
+<main class="container">
+  <section class="single-product__title">
+    <p class="single-product__category">{{product.category}}</p>
+    <p class="single-product__name">{{product.name}}</p>
+  </section>
+  <section class="basic-info">
+    <div class="basic-info__image-container">
+      <img
+        src="/images/products/thumbnails/{{product.thumbnail}}"
+        alt="image of item"
+        class="basic-info__image"
+      />
+    </div>
+    <div class="basic-info__content-container">
+      <p class="basic-info__category">{{product.category}}</p>
+      <p class="basic-info__item-name">{{product.name}}</p>
+      <div class="basic-info__shop-name-container">
+        <ion-icon name="person" class="basic-info__shop-name-icon"></ion-icon>
+        <p class="basic-info__shop-name">{{product.seller.username}}</p>
+      </div>
+      <p class="basic-info__intro">
+        {{product.shortDescription}}
+      </p>
+      <div class="basic-info__price-container">
+        <p class="basic-info__price">{{product.price}}</p>
+      </div>
+      <div class="basic-info__sold-container">
+        <p class="basic-info__sold-number"><span>SOLD: </span> 69</p>
+      </div>
+      <div class="basic-info__buttons-container">
+        <button class="btn btn--black">Edit</button>
+      </div>
+    </div>
+  </section>
+  <section class="detail">
+    <h3 class="header-tertiary">CHI TIẾT SẢN PHẨM</h3>
+    <p class="detail__content">
+      {{product.longDescription}}
+    </p>
+  </section>
+</main>
