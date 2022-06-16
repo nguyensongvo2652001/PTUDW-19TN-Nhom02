@@ -9,11 +9,11 @@ const router = express.Router();
 //TEST FRONTEND SINGUP, LOGIN
 
 router.get("/signup", (req, res) => {
-  res.render("./pages/signup",{layout: './authentication'})
+  res.render("./partials/signupForm",{layout: './authentication'})
 });
 
 router.get("/login", (req, res) => {
-  res.render("./pages/login",{layout: './authentication'})
+  res.render("./partials/loginForm",{layout: './authentication'})
 });
 
 //END TEST FRONTEND SINGUP, LOGIN
