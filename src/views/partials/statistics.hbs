@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <section class="section-content py-3">
+    <div class="row">
+      {{> profileAside }}
+      <main class="col-lg-5">
+        <div class="statistic-text-container">
+          <h1 class="title">Statistics</h1>
+          <div class="row">
+            <h2 class="name col-sm-6">Total sold products:</h2>
+            <span class="value col-sm-2 text-right">100,385</span>
+          </div>
+          <div class="row">
+            <h2 class="name col-sm-6">Total revenue:</h2>
+            <span class="value col-sm-2 text-right">980,273$</span>
+          </div>
+        </div>
+        <div class="statistic-graph-container">
+          <canvas id="statistic-1" class="w-100"></canvas>
+        </div>
+
+        <div class="statistic-graph-container">
+          <canvas id="statistic-2" class="w-100"></canvas>
+        </div>
+      </main>
+    </div>
+  </section>
+</div>

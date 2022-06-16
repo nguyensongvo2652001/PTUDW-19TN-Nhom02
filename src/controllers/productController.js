@@ -16,7 +16,8 @@ function fileFilter(req, file, cb) {
   if (fileType !== "image")
     return cb(
       new AppError(
-        `${fieldname} must be an image. Please try another file`,
+        `
+        ${fieldname} must be an image. Please try another file`,
         400
       ),
       false
@@ -39,7 +40,9 @@ const resizeAndStoreThumbnail = async (product, buffer) => {
   await sharp(buffer)
     .resize(500, 500)
     .jpeg({ quality: 80 })
-    .toFile(`public/images/products/thumbnails/${updatedProduct.thumbnail}`);
+    .toFile(
+      public / images / products / thumbnails / `${updatedProduct.thumbnail}`
+    );
 
   return updatedProduct;
 };
@@ -170,16 +173,21 @@ const updateProduct = catchAsync(async (req, res, next) => {
 });
 
 const getAllProducts = catchAsync(async (req, res, next) => {
-  const features = new APIFeatures(Product.find(req.productsFilter), req.query)
+  const features = new APIFeatures(
+    Product.find(req.productsFilter).lean(),
+    req.query
+  )
     .filter()
     .sort();
 
   const products = await features.queryObj;
   const data = {
     header: "header",
+    content: "homePage",
+    footer: "footer",
     products: products,
   };
-  res.render("pages/authenticatedHomePage", data);
+  res.render("layouts/main", data);
   // res.status(200).json({
   //   status: "success",
   //   data: {
@@ -197,9 +205,11 @@ const getProduct = catchAsync(async (req, res, next) => {
 
   const data = {
     header: "header",
+    content: "detailItem",
+    footer: "footer",
     product: product,
   };
-  res.render("pages/authenticatedDetailItem", data);
+  res.render("layouts/main", data);
   // console.log(product);
   // res.status(200).json({
   //   status: "success",
