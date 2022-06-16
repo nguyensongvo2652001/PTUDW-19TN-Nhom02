@@ -14,8 +14,8 @@ const app = express();
 
 // Handlebars
 const hbs = expressHBS.create({
-  layoutsDir: path.join(__dirname, "/views/layouts/"),
-  partialsDir: path.join(__dirname, "./views/partials/"),
+  layoutsDir: path.join(__dirname, "/views/layouts"),
+  partialsDir: path.join(__dirname, "./views/partials"),
   defaultLayout: "main",
   extname: "hbs",
 });
@@ -24,7 +24,7 @@ app.set("view engine", "hbs");
 app.set("views", "./views");
 // End handlebars
 
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json({ limit: process.env.MAX_REQUEST_BODY_SIZE }));
 app.use(cookieParser());
