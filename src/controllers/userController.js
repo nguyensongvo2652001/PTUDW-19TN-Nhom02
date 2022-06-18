@@ -47,15 +47,28 @@ const resizeAndStoreAvatar = catchAsync(async (req, res, next) => {
 });
 
 const getUser = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id).lean();
 
   if (!user)
     return next(new AppError("Can not find the user with specified id", 404));
 
-  res.status(200).json({
-    status: "success",
-    data: { user },
-  });
+  
+  
+  //////////////// TEST HANDLEBARS USERPROFILE SELLERPROFILE /////////////////////////////////////
+    const data = {
+      header: "header",
+      user: user,
+      editButton: false,
+      asideProfile: true,
+    };
+  res.render("partials/profilePage", data);
+  //console.log(user.id)
+  //res.status(200).json({
+    //status: "success",
+    //data: { user },
+  //});
+
+   //////////////// END TEST HANDLEBARS USERPROFILE SELLERPROFILE /////////////////////////////////////
 });
 
 const updateMe = catchAsync(async (req, res, next) => {

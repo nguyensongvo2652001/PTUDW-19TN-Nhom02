@@ -184,7 +184,8 @@ const getAllProducts = catchAsync(async (req, res, next) => {
     footer: "footer",
     products: products,
   };
-  res.render("layouts/main", data);
+  console.log(products);
+  res.render("partials/authenticatedHomePage", data);
   // res.status(200).json({
   //   status: "success",
   //   data: {
@@ -206,7 +207,7 @@ const getProduct = catchAsync(async (req, res, next) => {
     footer: "footer",
     product: product,
   };
-  res.render("layouts/main", data);
+  res.render("partials/authenticatedDetailItem", data);
   // console.log(product);
   // res.status(200).json({
   //   status: "success",

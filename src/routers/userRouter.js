@@ -6,6 +6,23 @@ const productRouter = require("./productRouter");
 
 const router = express.Router();
 
+
+//TEST HANDLEBAR SINGUP, LOGIN, EDIT PROFILE
+
+router.get("/editprofile", (req, res) => {
+  res.render("./partials/profileForm",{ header: "header" })
+});
+
+router.get("/signup", (req, res) => {
+  res.render("./partials/signupForm",{layout: './authentication'})
+});
+
+router.get("/login", (req, res) => {
+  res.render("./partials/loginForm",{layout: './authentication'})
+});
+
+//END TEST FRONTEND SINGUP, LOGIN
+
 router.post("/login", authController.login);
 router.post("/signUp", authController.signUp);
 
