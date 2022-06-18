@@ -16,7 +16,8 @@ function fileFilter(req, file, cb) {
   if (fileType !== "image")
     return cb(
       new AppError(
-        `${fieldname} must be an image. Please try another file`,
+        `
+        ${fieldname} must be an image. Please try another file`,
         400
       ),
       false
@@ -39,7 +40,9 @@ const resizeAndStoreThumbnail = async (product, buffer) => {
   await sharp(buffer)
     .resize(500, 500)
     .jpeg({ quality: 80 })
-    .toFile(`public/images/products/thumbnails/${updatedProduct.thumbnail}`);
+    .toFile(
+      public / images / products / thumbnails / `${updatedProduct.thumbnail}`
+    );
 
   return updatedProduct;
 };

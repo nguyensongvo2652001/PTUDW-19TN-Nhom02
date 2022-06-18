@@ -1,3 +1,4 @@
+<<<<<<< HEAD
     <div class="profilePage">
       <div class="profilePageName">PROFILE</div>
       <section class="profileMainBanner container-fluid row">
@@ -62,4 +63,70 @@
           </div>
         </div>
       </section>
+=======
+    <div class="profilePage">
+      <div class="profilePageName">PROFILE</div>
+      <section class="profileMainBanner container-fluid row">
+       {{>asideProfile}}
+
+        <div class="profileMainBoard m-4 col-lg-6">
+          <div class="profileContent m-4">
+            <form class="formProfile">
+              <div class="nameField">
+                <label for="Username" class="form-label">Họ và Tên:</label>
+                <input
+                  type="text"
+                  class="form-control mt-2"
+                  id="Username"
+                  name="Username"
+                  required
+                />
+              </div>
+              <div class="descriptionField">
+                <label for="description" class="form-label">Miêu tả:</label>
+                <textarea
+                  id="w3review"
+                  name="w3review"
+                  rows="10"
+                  cols="50"
+                  class="form-control mt-2"
+                  id="description"
+                  name="description"
+                >
+                </textarea>
+              </div>
+              <div class="userphoneField">
+                <label for="PhoneNumber">Số điện thoại:</label>
+                <input type="tel" class="form-control mt-2" id="PhoneNumber"
+                name="PhoneNumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                required>
+              </div>
+              <div class="shopNameField">
+                <label for="shopName">Tên cửa hàng:</label>
+                <input
+                  type="text"
+                  class="form-control mt-2"
+                  id="shopName"
+                  name="shopName"
+                  required
+                />
+              </div>
+              <div class="avatarField">
+                <label for="avatar">Avatar:</label>
+                <input
+                  type="file"
+                  class="form-control mt-2"
+                  id="avatar"
+                  name="avatar"
+                  accept="image/*"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="saveButtonDiv m-4">
+            <button type="submit" class="saveButton btn btn-dark">Save</button>
+          </div>
+        </div>
+      </section>
+>>>>>>> 974db2f8fbec8accedfe83b3163db37c64b2282c
     </div>
