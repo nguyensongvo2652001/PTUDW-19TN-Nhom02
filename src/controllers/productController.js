@@ -180,10 +180,11 @@ const getAllProducts = catchAsync(async (req, res, next) => {
   const products = await features.queryObj;
   const data = {
     header: "header",
+    content: "homePage",
+    footer: "footer",
     products: products,
   };
-  console.log(products);
-  res.render("pages/authenticatedHomePage", data);
+  res.render("layouts/main", data);
   // res.status(200).json({
   //   status: "success",
   //   data: {
@@ -201,9 +202,11 @@ const getProduct = catchAsync(async (req, res, next) => {
 
   const data = {
     header: "header",
+    content: "detailItem",
+    footer: "footer",
     product: product,
   };
-  res.render("pages/authenticatedDetailItem", data);
+  res.render("layouts/main", data);
   // console.log(product);
   // res.status(200).json({
   //   status: "success",

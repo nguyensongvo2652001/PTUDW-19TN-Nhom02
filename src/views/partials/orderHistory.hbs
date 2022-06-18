@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="./css/orderHistory.css" />
+<section id="main" class="container text-center mb-3">
+  <h2 class="mb-3">Order History</h2>
+  <ul class="list-group list-group-flush unstyled">
+    {{#each products}}
+      <li class="item row mb-3">
+        <img
+          src="/images/products/thumbnails/{{this.product.thumbnail}}"
+          alt="{{this.product.name}}'s image"
+          class="img-fluid col-6 col-md-3"
+        />
+        <div class="name-col col-6 col-md-3">
+          <span class="text-dark">{{this.product.name}}</span>
+        </div>
+        <div class="quantity-col col-4 col-md-2 d-flex flex-column">
+          <span class="text-muted">Quantity</span>
+          <span class="text-dark">{{this.count}}</span>
+        </div>
+        <div class="price-col col-4 col-md-2 d-flex flex-column">
+          <span class="text-muted">Price</span>
+          <span class="text-dark">{{this.product.price}}</span>
+        </div>
+        <div class="date-col col-4 col-md-2 d-flex flex-column">
+          <span class="text-muted">Dates</span>
+          <span class="text-dark">{{this.dateOrdered}}</span>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</section>
+{{>pagination}}

@@ -42,8 +42,9 @@
   <body>
     {{!-- header template --}}
     {{> (lookup . 'header') }}
-    {{{body}}}
+    {{!-- body template --}}
+    {{> (lookup . 'content') }}
     {{!-- footer template --}}
-    {{>footer}}
+    {{> (lookup . 'footer') }}
   </body>
 </html>

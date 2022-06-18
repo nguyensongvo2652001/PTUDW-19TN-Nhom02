@@ -94,11 +94,21 @@ const getOrdersHistory = catchAsync(async (req, res, next) => {
     .sort();
   const products = await features.queryObj;
 
-  res.status(200).json({
-    status: "success",
-    length: products.length,
-    data: { products },
-  });
+  // res.status(200).json({
+  //   status: "success",
+  //   length: products.length,
+  //   data: { products },
+  // });
+
+  const data = {
+    header: "header",
+    footer: "footer",
+    content: "orderHistory",
+
+    products: products,
+  };
+  console.log(data.products);
+  res.render("layouts/main", data);
 });
 
 module.exports = { createOrder, getOrdersHistory };
