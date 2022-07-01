@@ -2,6 +2,8 @@ const express = require("express");
 
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
+const productController = require("../controllers/productController");
+
 const productRouter = require("./productRouter");
 
 const router = express.Router();
@@ -15,8 +17,6 @@ router.get("/signup", (req, res) => {
 router.get("/login", (req, res) => {
   res.render("./partials/loginForm", { layout: "./authentication" });
 });
-
-
 
 //END TEST FRONTEND SINGUP, LOGIN
 
@@ -41,7 +41,9 @@ router
 
 router.route("/:id").get(userController.getUser);
 
-router.use("/me/products", productRouter);
+router
+  .route("/me/products")
+  .get(authController.checkUser, productController.getUserProducts);
 router.use("/:sellerId/products", productRouter);
 
 module.exports = router;

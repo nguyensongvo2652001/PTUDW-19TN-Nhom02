@@ -28,7 +28,7 @@ clickElement(headerProfileIcon, "/api/v1/users/me");
 
 clickElement(headerCartIcon, "cart.html");
 clickElement(productProfileLink, "/api/v1/users/me");
-clickElement(productManagerProfileLink, "productManager.html");
+clickElement(productManagerProfileLink, "/api/v1/users/me/products");
 clickElement(profitProfileLink, "statistics.html");
 
 clickElement(loginLinkButton, "/api/v1/users/login");

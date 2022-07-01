@@ -206,12 +206,33 @@ const getProduct = catchAsync(async (req, res, next) => {
   res.render("layouts/main", data);
 });
 
+const getUserProducts = catchAsync(async (req, res, next) => {
+  if (req.user == null) {
+    //TODO reroute to login
+    res.redirect(401, "/api/v1/login");
+    next();
+  }
+  const products = await Product.find({ seller: req.user }).lean();
+
+  if (!products)
+    return next(new AppError("No products found with the specified id", 404));
+
+  const data = {
+    header: "header",
+    content: "productManager",
+    footer: "footer",
+    products: products,
+  };
+  res.render("layouts/main", data);
+});
+
 module.exports = {
   uploadThumbnail,
   resizeAndStoreThumbnail,
   addProduct,
   getAllProducts,
   getProduct,
+  getUserProducts,
   setProductFilterObject,
   verifyProductSeller,
   verifyIfProductForSale,
