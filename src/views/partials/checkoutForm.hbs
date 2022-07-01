@@ -1,0 +1,103 @@
+ 
+   <div class="checkOutPage">
+      <div class="checkOutPageName">CHECK OUT</div>
+      <section class="checkOutMainBanner container-fluid">
+        <div class="checkOutMainBoard m-4">
+          <div class="checkOutContent m-4">
+            <form class="formCheckOut" action="/api/v1/orders/" method="post" id="checkoutForm">
+              <div class="nameField">
+                <label for="Username" class="form-label">Họ và Tên:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Username"
+                  name="name"
+                  required
+                />
+              </div>
+              <div class="phoneField">
+                <label for="PhoneNumber">Số điện thoại:</label>
+                <input type="tel" class="form-control" id="PhoneNumber"
+                name="phoneNumber" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                required>
+              </div>
+              <div class="provinceField">
+                <label for="Province">Tỉnh:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Province"
+                  name="province"
+                  required
+                />
+              </div>
+              <div class="districtAndWardField">
+                <div class="districtField">
+                  <label for="District">Quận/Huyện:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="District"
+                    name="district"
+                    required
+                  />
+                </div>
+                <div class="wardField">
+                  <label for="Ward">Phường/Xã:</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="Ward"
+                    name="ward"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="addressField">
+                <label for="Address">Địa chỉ:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Address"
+                  name="address"
+                  required
+                />
+              </div>
+            </form>
+            <div class="checkOutInformation">
+              <div class="productCost costField">
+                <p class="costFieldName">Tiền hàng:</p>
+                <p class="costValue">300$</p>
+              </div>
+              <div class="transportCost costField">
+                <p class="costFieldName">Phí vận chuyển:</p>
+                <p class="costValue">20$</p>
+              </div>
+              <div class="extraCost costField">
+                <p class="costFieldName">Phụ phí khác:</p>
+                <p class="costValue">5$</p>
+              </div>
+              <hr />
+              <div class="sumCost costField">
+                <p class="costFieldName">Total:</p>
+                <p class="costValue">325$</p>
+              </div>
+              <div>
+                <button type="submit" class="confirmButton btn btn-dark w-100">
+                  Confirm
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="backPageFeature m-4">
+            <a class="backPageText" href="./cart">
+              <ion-icon
+                name="arrow-back-outline"
+                class="arrowLeft__icon"
+              ></ion-icon
+              >Back to my cart
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>

@@ -16,6 +16,8 @@ router.get("/login", (req, res) => {
   res.render("./partials/loginForm", { layout: "./authentication" });
 });
 
+
+
 //END TEST FRONTEND SINGUP, LOGIN
 
 router.post("/login", authController.login);
