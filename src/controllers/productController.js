@@ -173,21 +173,21 @@ const updateProduct = catchAsync(async (req, res, next) => {
 });
 
 const getAllProducts = catchAsync(async (req, res, next) => {
-  console.log("Con cac");
   const features = new APIFeatures(
     Product.find(req.productsFilter).lean(),
     req.query
   )
     .filter()
     .sort();
-
   const products = await features.queryObj;
+  console.log(req.user);
   const data = {
-    header: "header",
+    header: req.user == null ? "unauthenticatedHeader" : "header",
     content: "homePage",
     footer: "footer",
     products: products,
   };
+
   res.render("layouts/main", data);
 });
 

@@ -107,4 +107,41 @@ const protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-module.exports = { signUp, login, protect };
+const checkUser = catchAsync(async (req, res, next) => {
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  )
+    token = req.headers.authorization.split(" ")[1];
+  token = token || req.cookies.jwt;
+
+  //Simply continue
+  if (!token) {
+    return next();
+  }
+
+  const decoded = await promisify(jwt.verify)(
+    token,
+    process.env.JWT_SECRET_KEY
+  );
+
+  const user = await User.findById(decoded.id).select(
+    "+passwordChangedAt +account"
+  );
+
+  //Simply next
+  if (!user) return next();
+
+  const changedPasswordAfter = user.changedPasswordAfter(
+    user.passwordChangedAt,
+    decoded.iat
+  );
+
+  if (changedPasswordAfter) return next();
+
+  req.user = user;
+  next();
+});
+
+module.exports = { signUp, login, protect, checkUser };
