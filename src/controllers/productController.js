@@ -187,14 +187,8 @@ const getAllProducts = catchAsync(async (req, res, next) => {
     footer: "footer",
     products: products,
   };
+  console.log(products);
   res.render("layouts/main", data);
-  // res.status(200).json({
-  //   status: "success",
-  //   data: {
-  //     length: products.length,
-  //     products,
-  //   },
-  // });
 });
 
 const getProduct = catchAsync(async (req, res, next) => {
@@ -210,13 +204,6 @@ const getProduct = catchAsync(async (req, res, next) => {
     product: product,
   };
   res.render("layouts/main", data);
-  // console.log(product);
-  // res.status(200).json({
-  //   status: "success",
-  //   data: {
-  //     product,
-  //   },
-  // });
 });
 
 module.exports = {
