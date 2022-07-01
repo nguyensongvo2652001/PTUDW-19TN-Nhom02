@@ -36,7 +36,6 @@ const createAndSendToken = async (args) => {
 
 const login = catchAsync(async (req, res, next) => {
   const { username, password } = req.body;
-
   if (!username || !password) {
     return next(new AppError("Username and password are required", 400));
   }

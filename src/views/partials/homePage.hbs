@@ -17,7 +17,11 @@
               class="homepage-product__name"
               href="/api/v1/products/{{this._id}}"
             >{{this.name}}</a>
-            <p class="homepage-product__seller">{{this.seller.username}}</p>
+            <a  href="/api/v1/users/{{this.seller._id}}">
+              <p class="homepage-product__seller">
+              {{this.seller.username}}
+              </p>
+            </a>
             <p class="homepage-product__price">{{this.price}}</p>
           </li>
           {{/each}}

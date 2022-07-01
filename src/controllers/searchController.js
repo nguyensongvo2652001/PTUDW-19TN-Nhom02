@@ -24,17 +24,27 @@ const search = catchAsync(async (req, res, next) => {
       { "seller.storeName": regexPartialQueryObject },
       { category: regexPartialQueryObject },
     ],
-  });
+  }).lean();
 
-  res.status(200).json({
-    status: "success",
-    usersLength: users.length,
-    productsLength: products.length,
-    data: {
-      users,
-      products,
-    },
-  });
+  console.log(products);
+  const data = {
+    header: "header",
+    content: "homePage",
+    footer: "footer",
+    products: products,
+  };
+  res.render("layouts/main", data);
+
+  // Cần chỉnh sửa
+  // res.status(200).json({
+  //   status: "success",
+  //   usersLength: users.length,
+  //   productsLength: products.length,
+  //   data: {
+  //     users,
+  //     products,
+  //   },
+  // });
 });
 
 module.exports = { search };

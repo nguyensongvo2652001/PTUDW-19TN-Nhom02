@@ -24,6 +24,8 @@ app.set("view engine", "hbs");
 app.set("views", "./views");
 // End handlebars
 
+app.use(express.json()); // for json
+app.use(express.urlencoded({ extended: true })); // for form data
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json({ limit: process.env.MAX_REQUEST_BODY_SIZE }));
