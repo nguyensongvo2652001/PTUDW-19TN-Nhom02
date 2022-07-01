@@ -7,6 +7,7 @@ const userRouter = require("./routers/userRouter");
 const productRouter = require("./routers/productRouter");
 const orderRouter = require("./routers/orderRouter");
 const searchRouter = require("./routers/searchRouter");
+const viewRouter = require("./routers/viewRouter");
 const AppError = require("./utils/appError");
 
 const path = require("path");
@@ -35,6 +36,7 @@ app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/orders", orderRouter);
+app.use("/", viewRouter);
 app.all("*", async (req, res, next) => {
   return next(new AppError("Can not find the specified url!", 404));
 });

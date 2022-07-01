@@ -1,15 +1,19 @@
 <main class="container">
-  <section class="basic-info">
+  <section
+    class="basic-info basic-product-info"
+    data-product-id={{product._id}}
+  >
     <div class="basic-info__image-container">
       <img
         src="/images/products/thumbnails/{{product.thumbnail}}"
         alt="image of item"
-        class="basic-info__image"
+        class="basic-info__image product__thumbnail"
+        data-product-thumbnail={{product.thumbnail}}
       />
     </div>
     <div class="basic-info__content-container">
       <p class="basic-info__category">{{product.category}}</p>
-      <p class="basic-info__item-name">{{product.name}}</p>
+      <p class="basic-info__item-name product__name">{{product.name}}</p>
       <div class="basic-info__shop-name-container">
         <ion-icon name="person" class="basic-info__shop-name-icon"></ion-icon>
         <p class="basic-info__shop-name">{{product.seller.username}}</p>
@@ -18,7 +22,7 @@
         {{product.shortDescription}}
       </p>
       <div class="basic-info__price-container">
-        <p class="basic-info__price">{{product.price}}</p>
+        <p class="basic-info__price product__price">{{product.price}}</p>
         <div class="basic-info__counter">
           <button class="basic-info__counter-btn basic-info__counter-minus">
             -
@@ -35,7 +39,7 @@
         </div>
       </div>
       <div class="basic-info__buttons-container">
-        <button class="btn btn--black">Add To Cart</button>
+        <button class="btn btn--black btn--addToCart">Add To Cart</button>
         <button class="btn btn--black-border">Add To Wishlist</button>
       </div>
     </div>
@@ -48,3 +52,4 @@
   </section>
 </main>
 <link rel="stylesheet" href="/css/detail-item.css" />
+<script src="/javascript/productDetail.js" defer></script>
