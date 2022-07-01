@@ -55,6 +55,8 @@ const getUser = catchAsync(async (req, res, next) => {
  //////////////// TEST HANDLEBARS USERPROFILE SELLERPROFILE /////////////////////////////////////
  const data = {
   header: "header",
+  content: "homePage",
+  footer: "footer",
   user: user,
   editButton: true,
   asideProfile: true,
