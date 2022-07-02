@@ -1,5 +1,6 @@
 const headerProfileIcon = document.querySelector(".header__profile-icon");
 const headerCartIcon = document.querySelector(".header__cart-icon");
+const headerMainIcon = document.querySelector(".header__shop-name");
 const headerHomeIcon = document.querySelector(".header__home-icon");
 const productProfileLink = document.querySelector(
   ".profile__product-profile-link"
@@ -12,7 +13,6 @@ const profitProfileLink = document.querySelector(
 );
 const loginLinkButton = document.querySelector(".header__auth-button--login");
 const signupLinkButton = document.querySelector(".header__auth-button--signup");
-const sellerLinks = document.querySelectorAll(".homepage-product__seller");
 
 const clickElement = (el, link) => {
   if (!el) return;
@@ -22,14 +22,14 @@ const clickElement = (el, link) => {
   });
 };
 
-clickElement(headerHomeIcon, "/");
-clickElement(headerProfileIcon, "profilePage.html");
+clickElement(headerMainIcon, "/api/v1/products");
+clickElement(headerHomeIcon, "/api/v1/products");
+clickElement(headerProfileIcon, "/api/v1/users/me");
+
 clickElement(headerCartIcon, "cart.html");
-clickElement(productProfileLink, "profilePage.html");
-clickElement(productManagerProfileLink, "productManager.html");
+clickElement(productProfileLink, "/api/v1/users/me");
+clickElement(productManagerProfileLink, "/api/v1/users/me/products");
 clickElement(profitProfileLink, "statistics.html");
-clickElement(loginLinkButton, "Login.html");
-clickElement(signupLinkButton, "Signup.html");
-sellerLinks.forEach((sellerLink) =>
-  clickElement(sellerLink, "sellerProfile.html")
-);
+
+clickElement(loginLinkButton, "/api/v1/users/login");
+clickElement(signupLinkButton, "/api/v1/users/signUp");

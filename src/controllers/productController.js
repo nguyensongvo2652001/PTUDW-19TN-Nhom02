@@ -179,22 +179,16 @@ const getAllProducts = catchAsync(async (req, res, next) => {
   )
     .filter()
     .sort();
-
   const products = await features.queryObj;
+  console.log(req.user);
   const data = {
-    header: "header",
+    header: req.user == null ? "unauthenticatedHeader" : "header",
     content: "homePage",
     footer: "footer",
     products: products,
   };
+
   res.render("layouts/main", data);
-  // res.status(200).json({
-  //   status: "success",
-  //   data: {
-  //     length: products.length,
-  //     products,
-  //   },
-  // });
 });
 
 const getProduct = catchAsync(async (req, res, next) => {
@@ -210,13 +204,26 @@ const getProduct = catchAsync(async (req, res, next) => {
     product: product,
   };
   res.render("layouts/main", data);
-  // console.log(product);
-  // res.status(200).json({
-  //   status: "success",
-  //   data: {
-  //     product,
-  //   },
-  // });
+});
+
+const getUserProducts = catchAsync(async (req, res, next) => {
+  if (req.user == null) {
+    //TODO reroute to login
+    res.redirect(401, "/api/v1/login");
+    next();
+  }
+  const products = await Product.find({ seller: req.user }).lean();
+
+  if (!products)
+    return next(new AppError("No products found with the specified id", 404));
+
+  const data = {
+    header: "header",
+    content: "productManager",
+    footer: "footer",
+    products: products,
+  };
+  res.render("layouts/main", data);
 });
 
 module.exports = {
@@ -225,6 +232,7 @@ module.exports = {
   addProduct,
   getAllProducts,
   getProduct,
+  getUserProducts,
   setProductFilterObject,
   verifyProductSeller,
   verifyIfProductForSale,

@@ -1,9 +1,23 @@
 <header class="header">
   <div class="header__content">
     <p class="header__shop-name">Kim Bien</p>
+
     <div class="header__search-bar">
-      <input class="header__input" type="text" placeholder="Search an item" />
-      <ion-icon name="search-outline" class="header__icon"></ion-icon>
+      <form action="/api/v1/search" method="get" id="SearchForm">
+        <input
+          class="header__input"
+          type="text"
+          placeholder="Search an item"
+          name="q"
+        />
+        <button type="submit">
+          <ion-icon
+            type="submit"
+            name="search-outline"
+            class="header__icon"
+          ></ion-icon>
+        </button>
+      </form>
     </div>
 
     <ul class="header__icons">

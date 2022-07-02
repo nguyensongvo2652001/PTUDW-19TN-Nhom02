@@ -1,0 +1,48 @@
+<section class="section-content py-3">
+  <div class="row">
+    {{>asideProfile}}
+    <main class="col-lg-9">
+      <div class="content">
+        <p>Product</p>
+        <h1>My Products</h1>
+        <button class="btn btn--add text-white">ADD ITEMS</button>
+        <div class="row">
+          <ul class="list-unstyled card-columns" style="column-count: 2;">
+            {{#each products}}
+              <li><a href="/api/v1/products/{{this._id}}" class="row">
+                  <div class="col-lg-5">
+                    <img
+                      src="/images/products/thumbnails/{{this.thumbnail}}"
+                      width="150"
+                      height="150"
+                      alt="Image of {{this.name}}"
+                    />
+                  </div>
+                  <div class="col-lg-7">
+                    <p class="product--name">{{this.name}}</p>
+                    <p class="product--price">{{this.price}}$</p>
+                    <p class="product--date">{{this.dateAdded}}</p>
+                  </div>
+                </a></li>
+            {{/each}}
+          </ul>
+
+        </div>
+        <nav class="pageChanger container-fluid">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link active" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item"><a class="page-link" href="#">6</a></li>
+          </ul>
+        </nav>
+      </div>
+    </main>
+  </div>
+</section>
+
+<link rel="stylesheet" href="/css/productManager.css" />

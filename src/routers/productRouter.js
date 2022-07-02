@@ -8,6 +8,7 @@ const router = express.Router({ mergeParams: true });
 router
   .route("/")
   .get(
+    authController.checkUser,
     productController.setProductFilterObject,
     productController.getAllProducts
   )
