@@ -28,6 +28,7 @@ function fileFilter(req, file, cb) {
 const upload = multer({ storage, fileFilter });
 const uploadThumbnail = upload.single("thumbnail");
 const resizeAndStoreThumbnail = async (product, buffer) => {
+  console.log(buffer);
   const updatedProduct = await Product.findByIdAndUpdate(
     product._id,
     {
@@ -40,9 +41,7 @@ const resizeAndStoreThumbnail = async (product, buffer) => {
   await sharp(buffer)
     .resize(500, 500)
     .jpeg({ quality: 80 })
-    .toFile(
-      public / images / products / thumbnails / `${updatedProduct.thumbnail}`
-    );
+    .toFile(`public/images/products/thumbnails/${updatedProduct.thumbnail}`);
 
   return updatedProduct;
 };
@@ -192,6 +191,12 @@ const getAllProducts = catchAsync(async (req, res, next) => {
 });
 
 const getProduct = catchAsync(async (req, res, next) => {
+  var content = null;
+  if (req.user == null) {
+    content = "detailItem";
+  } else {
+    content = "productInspect";
+  }
   const product = await Product.findById(req.params.id).lean();
 
   if (!product)
@@ -199,7 +204,7 @@ const getProduct = catchAsync(async (req, res, next) => {
 
   const data = {
     header: "header",
-    content: "detailItem",
+    content: content,
     footer: "footer",
     product: product,
   };
@@ -208,8 +213,6 @@ const getProduct = catchAsync(async (req, res, next) => {
 
 const getUserProducts = catchAsync(async (req, res, next) => {
   if (req.user == null) {
-    //TODO reroute to login
-    res.redirect(401, "/api/v1/login");
     next();
   }
   const products = await Product.find({ seller: req.user }).lean();

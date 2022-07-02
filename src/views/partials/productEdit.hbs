@@ -1,41 +1,98 @@
-<main class="container">
-  <section class="single-product__title">
-    <p class="single-product__category">{{product.category}}</p>
-    <p class="single-product__name">{{product.name}}</p>
-  </section>
-  <section class="basic-info">
-    <div class="basic-info__image-container">
-      <img
-        src="/images/products/thumbnails/{{product.thumbnail}}"
-        alt="image of item"
-        class="basic-info__image"
-      />
+<div class="container" id="form">
+  <div class="row justify-content-md-center">
+    <div id="holder" class="col col-sm-6 border boder-dark rounded px-5">
+      <h2 class="text-uppercase text-center">chỉnh sửa sản phẩm</h2>
+      <form
+        action="/api/v1/products/{{product._id}}?_method=PATCH"
+        enctype="multipart/form-data"
+        method="post"
+        id="PatchForm"
+      >
+        <div class="mb-3">
+          <label for="product-name" class="form-label">Tên sản phẩm</label>
+          <input
+            type="text"
+            class="form-control"
+            id="product-name"
+            name="name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="product-price" class="form-label">Giá sản phẩm</label>
+          <input
+            type="number"
+            class="form-control"
+            id="product-price"
+            name="price"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="short-description" class="form-label">Mô tả sản phẩm</label>
+          <textarea
+            class="form-control"
+            id="short-description"
+            rows="5"
+            name="shortDescription"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="long-description" class="form-label">Mô tả chi tiết sản
+            phẩm</label>
+          <textarea
+            class="form-control"
+            id="long-description"
+            rows="12"
+            name="longDescription"
+          ></textarea>
+        </div>
+
+        <div class="mb-3">
+          <select
+            id="groups"
+            multiple
+            class="selectpicker w-auto"
+            data-live-search="true"
+            name="category"
+          >
+            <option selected disabled>Select one or more groups</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            for="image-selection"
+            class="form-label col-auto"
+          >Thumbnail</label>
+          <input
+            type="file"
+            accept="image/*"
+            class="form-control col-auto"
+            id="image-selection"
+            name="thumbnail"
+          />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-dark mb-3 text-uppercase">
+            Save
+          </button>
+          <button
+            type="button"
+            class="btn btn-dark mb-3 text-uppercase"
+            id="btn--cancel"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
-    <div class="basic-info__content-container">
-      <p class="basic-info__category">{{product.category}}</p>
-      <p class="basic-info__item-name">{{product.name}}</p>
-      <div class="basic-info__shop-name-container">
-        <ion-icon name="person" class="basic-info__shop-name-icon"></ion-icon>
-        <p class="basic-info__shop-name">{{product.seller.username}}</p>
-      </div>
-      <p class="basic-info__intro">
-        {{product.shortDescription}}
-      </p>
-      <div class="basic-info__price-container">
-        <p class="basic-info__price">{{product.price}}</p>
-      </div>
-      <div class="basic-info__sold-container">
-        <p class="basic-info__sold-number"><span>SOLD: </span> 69</p>
-      </div>
-      <div class="basic-info__buttons-container">
-        <button class="btn btn--black">Edit</button>
-      </div>
-    </div>
-  </section>
-  <section class="detail">
-    <h3 class="header-tertiary">CHI TIẾT SẢN PHẨM</h3>
-    <p class="detail__content">
-      {{product.longDescription}}
-    </p>
-  </section>
-</main>
+  </div>
+</div>
+
+<link rel="stylesheet" href="/css/productEditPopup.css" />
+<script type="text/javascript" src="/javascript/popupForm.js"></script>
+<script>
+  closeFormEvent("btn--cancel", "form");
+</script>

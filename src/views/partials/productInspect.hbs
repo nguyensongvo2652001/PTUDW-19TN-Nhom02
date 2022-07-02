@@ -1,0 +1,45 @@
+<main class="container">
+  <section
+    class="basic-info basic-product-info"
+    data-product-id={{product._id}}
+  >
+    <div class="basic-info__image-container">
+      <img
+        src="/images/products/thumbnails/{{product.thumbnail}}"
+        alt="image of item"
+        class="basic-info__image product__thumbnail"
+        data-product-thumbnail={{product.thumbnail}}
+      />
+    </div>
+    <div class="basic-info__content-container">
+      <p class="basic-info__category">{{product.category}}</p>
+      <p class="basic-info__item-name product__name">{{product.name}}</p>
+      <div class="basic-info__shop-name-container">
+        <ion-icon name="person" class="basic-info__shop-name-icon"></ion-icon>
+        <p class="basic-info__shop-name">{{product.seller.username}}</p>
+      </div>
+      <p class="basic-info__intro">
+        {{product.shortDescription}}
+      </p>
+      <div class="basic-info__price-container">
+        <p class="basic-info__price product__price">{{product.price}}</p>
+      </div>
+      <div class="basic-info__buttons-container">
+        <button class="btn btn--black btn--edit" id="btn--edit">Edit</button>
+      </div>
+    </div>
+  </section>
+  <section class="detail">
+    <h3 class="header-tertiary">CHI TIẾT SẢN PHẨM</h3>
+    <p class="detail__content">
+      {{product.longDescription}}
+    </p>
+  </section>
+  {{>productEdit}}
+</main>
+<link rel="stylesheet" href="/css/detail-item.css" />
+<script type="text/javascript" src="/javascript/productDetail.js"></script>
+<script type="text/javascript" src="/javascript/popupForm.js"></script>
+<script>
+  openFormEvent("btn--edit", "form");
+</script>

@@ -20,7 +20,11 @@ router
 
 router
   .route("/:id")
-  .get(productController.setProductFilterObject, productController.getProduct)
+  .get(
+    authController.checkUser,
+    productController.setProductFilterObject,
+    productController.getProduct
+  )
   .delete(
     authController.protect,
     productController.verifyIfProductForSale,

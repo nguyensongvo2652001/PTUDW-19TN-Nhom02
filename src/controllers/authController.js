@@ -144,4 +144,8 @@ const checkUser = catchAsync(async (req, res, next) => {
   next();
 });
 
-module.exports = { signUp, login, protect, checkUser };
+const redirect = catchAsync(async (req, res, next) => {
+  res.redirect(401, "/api/v1/login");
+});
+
+module.exports = { signUp, login, protect, checkUser, redirect };
