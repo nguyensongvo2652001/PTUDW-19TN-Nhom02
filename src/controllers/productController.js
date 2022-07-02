@@ -73,6 +73,8 @@ const addProduct = catchAsync(async (req, res, next) => {
 
   product = await resizeAndStoreThumbnail(product, thumbnail.buffer);
 
+  next("/");
+  res.redirect("/api/v1/users/me/products");
   res.status(201).json({
     status: "success",
     data: { product },
@@ -163,6 +165,8 @@ const updateProduct = catchAsync(async (req, res, next) => {
   if (thumbnail)
     product = await resizeAndStoreThumbnail(product, thumbnail.buffer);
 
+  console.log(">>>>");
+  res.redirect("/api/v1/products");
   res.status(200).json({
     status: "success",
     data: {

@@ -5,7 +5,7 @@
       <div class="content">
         <p>Product</p>
         <h1>My Products</h1>
-        <button class="btn btn--add text-white">ADD ITEMS</button>
+        <button class="btn btn--add text-white">ADD ITEM</button>
         <div class="row">
           <ul class="list-unstyled card-columns" style="column-count: 2;">
             {{#each products}}
@@ -43,6 +43,21 @@
       </div>
     </main>
   </div>
+  <div id="ProductForm">
+
+    {{>productPost}}
+  </div>
 </section>
 
 <link rel="stylesheet" href="/css/productManager.css" />
+<script type="text/javascript">
+  const edit = document.querySelector(".btn--add"); 
+  const display = document.querySelector(".row");
+  const form = document.querySelector("#ProductForm");
+  const cancel = document.querySelector("#btn--cancel");
+
+  hideElement(form);
+
+  cancel.addEventListener("click", () => {hideElement(form); showElement(display);});
+  edit.addEventListener("click", () => {showElement(form); hideElement(display);});
+</script>
