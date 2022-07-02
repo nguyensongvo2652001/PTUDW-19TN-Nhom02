@@ -14,6 +14,7 @@ const profitProfileLink = document.querySelector(
 const loginLinkButton = document.querySelector(".header__auth-button--login");
 const signupLinkButton = document.querySelector(".header__auth-button--signup");
 
+
 const clickElement = (el, link) => {
   if (!el) return;
 
