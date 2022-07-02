@@ -48,7 +48,19 @@
   justify-content: center;
   align-items: center;
 }
-.saveButton {
+.saveEditProfileButton {
+  margin-top: 12px;
+  height: 60px;
+  font-size: 30px;
+  width: 30%;
+}
+
+.cancelButtonDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cancelEditProfileButton {
   margin-top: 12px;
   height: 60px;
   font-size: 30px;

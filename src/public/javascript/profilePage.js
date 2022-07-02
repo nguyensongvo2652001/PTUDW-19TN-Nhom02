@@ -4,6 +4,7 @@ const profilePage = document.querySelector(".profilePage")
 const editProfileForm = profilePage.querySelector(".popupProfileForm")
 const editProfileButton = profilePage.querySelector(".editProfileButton")
 const saveEditProfileButton = profilePage.querySelector(".saveEditProfileButton")
+const cancelEditProfileButton = profilePage.querySelector(".cancelEditProfileButton")
 
 const nameInput = editProfileForm.querySelector("#Username")
 const descriptionInput = editProfileForm.querySelector("#description")
@@ -12,7 +13,7 @@ const shopNameInput = editProfileForm.querySelector("#shopName")
 const avatarInput = editProfileForm.querySelector("#avatar")
 
 editProfileButton.addEventListener("click", () => {
-    document.getElementsByClassName("profileMainBanner")[0].style.height = "120%"
+    document.getElementsByClassName("profileMainBanner")[0].style.height = "140%"
     showElement(editProfileForm)
 })
 
@@ -20,6 +21,10 @@ saveEditProfileButton.addEventListener("click", () => {
     updateProfile()
 })
 
+cancelEditProfileButton.addEventListener("click", () => {
+  hideElement(editProfileForm);
+  document.getElementsByClassName("profileMainBanner")[0].style.height = ""
+})
 
 const updateProfile = async () => {
     try {
