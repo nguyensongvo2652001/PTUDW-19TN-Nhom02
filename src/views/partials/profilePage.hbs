@@ -50,7 +50,7 @@
                   class="form-control mt-2"
                   id="Username"
                   name="Username"
-                  value={{user.username}}
+                  value="{{user.username}}"
                   required
                 />
               </div>
@@ -62,14 +62,14 @@
                   class="form-control mt-2"
                   id="description"
                   name="description"
-                  value={{user.description}}
+                  value="{{user.description}}"
                 >
                 </textarea>
               </div>
               <div class="userphoneField">
                 <label for="PhoneNumber">Số điện thoại:</label>
                 <input type="tel" class="form-control mt-2" id="PhoneNumber"
-                name="PhoneNumber" pattern="[0-9]{10}" value={{user.phoneNumber}}>
+                name="PhoneNumber" pattern="[0-9]{10}" value="{{user.phoneNumber}}">
               </div>
               <div class="shopNameField">
                 <label for="shopName">Tên cửa hàng:</label>
@@ -78,7 +78,7 @@
                   class="form-control mt-2"
                   id="shopName"
                   name="shopName" 
-                  value={{user.storeName}}/>
+                  value="{{user.storeName}}"/>
               </div>
               <div class="avatarField">
                 <label for="avatar">Avatar:</label>
