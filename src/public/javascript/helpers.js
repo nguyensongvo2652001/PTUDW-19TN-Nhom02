@@ -1,4 +1,4 @@
-export const sendRequest = async (url, options) => {
+const sendRequest = async (url, options) => {
   const response = await fetch(url, options);
 
   let data = null;
@@ -13,11 +13,11 @@ export const sendRequest = async (url, options) => {
   return data;
 };
 
-export const redirect = (url) => {
+const redirect = (url) => {
   window.location.href = url;
 };
 
-export const addErrorElement = (element, message) => {
+const addErrorElement = (element, message) => {
   const errorElement = document.createElement("p");
   errorElement.textContent = message;
   errorElement.classList.add("error");
@@ -26,12 +26,18 @@ export const addErrorElement = (element, message) => {
   return errorElement;
 };
 
-export const showElement = (element) => {
+const showElement = (element) => {
   element.classList.remove("hidden");
 };
 
-export const hideElement = (element) => {
+const hideElement = (element) => {
   element.classList.add("hidden");
 };
 
-
+exports = {
+  sendRequest,
+  redirect,
+  addErrorElement,
+  showElement,
+  hideElement,
+};

@@ -1,5 +1,3 @@
-import { showElement, hideElement, sendRequest, redirect } from "./helpers.js";
-
 const profilePage = document.querySelector(".profilePage")
 const editProfileForm = profilePage.querySelector(".popupProfileForm")
 const editProfileButton = profilePage.querySelector(".editProfileButton")
@@ -27,27 +25,27 @@ cancelEditProfileButton.addEventListener("click", () => {
 })
 
 const updateProfile = async () => {
-    try {
-      const data = {};
-      if (avatarInput.files.length > 0) data["avatar"] = avatarInput.files[0];
-      data["username"] = nameInput.value;
-      data["description"] = descriptionInput.value;
-      data["phoneNumber"] = phoneNumberInput.value;
-      data["storeName"] = shopNameInput.value;
+  try {
+    const data = {};
+    if (avatarInput.files.length > 0) data["avatar"] = avatarInput.files[0];
+    data["username"] = nameInput.value;
+    data["description"] = descriptionInput.value;
+    data["phoneNumber"] = phoneNumberInput.value;
+    data["storeName"] = shopNameInput.value;
 
-    console.log(data)
-  
-      const formData = new FormData();
-      Object.keys(data).forEach((key) => formData.append(key, data[key]));
-  
-      await sendRequest("/api/v1/users/me", {
-        method: "PATCH",
-        body: formData,
-      });
-  
-      hideElement(editProfileForm);
-      redirect("/api/v1/users/me");
-    } catch {
-      showAlert("error", "Something went wrong", 2 * 1000);
-    }
-  };
+    console.log(data);
+
+    const formData = new FormData();
+    Object.keys(data).forEach((key) => formData.append(key, data[key]));
+
+    await sendRequest("/api/v1/users/me", {
+      method: "PATCH",
+      body: formData,
+    });
+
+    hideElement(editProfileForm);
+    redirect("/api/v1/users/me");
+  } catch {
+    showAlert("error", "Something went wrong", 2 * 1000);
+  }
+};
