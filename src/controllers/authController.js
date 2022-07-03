@@ -102,7 +102,6 @@ const protect = catchAsync(async (req, res, next) => {
         400
       )
     );
-
   req.user = user;
   next();
 });
@@ -145,7 +144,7 @@ const checkUser = catchAsync(async (req, res, next) => {
 });
 
 const redirect = catchAsync(async (req, res, next) => {
-  res.redirect(401, "/api/v1/login");
+  res.redirect(401, "/api/v1/users/login");
 });
 
 module.exports = { signUp, login, protect, checkUser, redirect };

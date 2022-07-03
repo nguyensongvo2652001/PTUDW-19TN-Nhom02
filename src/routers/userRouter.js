@@ -48,6 +48,13 @@ router
     productController.getUserProducts,
     authController.redirect
   );
+router
+  .route("/me/statistics")
+  .get(
+    authController.protect,
+    productController.getStatistics,
+    authController.redirect
+  );
 router.use("/:sellerId/products", productRouter);
 
 module.exports = router;

@@ -14,7 +14,6 @@ const profitProfileLink = document.querySelector(
 const loginLinkButton = document.querySelector(".header__auth-button--login");
 const signupLinkButton = document.querySelector(".header__auth-button--signup");
 
-
 const clickElement = (el, link) => {
   if (!el) return;
 
@@ -23,14 +22,21 @@ const clickElement = (el, link) => {
   });
 };
 
+//Cart
+const cartBackToShopping = document.querySelector(".cartBackPageText");
+const cartCheckout = document.querySelector(".cartCheckout");
+clickElement(cartBackToShopping, "api/v1/products");
+clickElement(cartCheckout, "/api/v1/");
+//
+
 clickElement(headerMainIcon, "/api/v1/products");
 clickElement(headerHomeIcon, "/api/v1/products");
 clickElement(headerProfileIcon, "/api/v1/users/me");
+clickElement(headerCartIcon, "/cart");
 
-clickElement(headerCartIcon, "cart.html");
 clickElement(productProfileLink, "/api/v1/users/me");
 clickElement(productManagerProfileLink, "/api/v1/users/me/products");
-clickElement(profitProfileLink, "statistics.html");
+clickElement(profitProfileLink, "/api/v1/users/me/statistics");
 
 clickElement(loginLinkButton, "/api/v1/users/login");
 clickElement(signupLinkButton, "/api/v1/users/signUp");
