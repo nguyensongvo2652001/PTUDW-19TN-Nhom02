@@ -37,16 +37,58 @@
         <a
           class="nav-link d-flex justify-content-between fw-bold"
           data-bs-toggle="collapse"
-          data-bs-target="#menu_item3"
+          data-bs-target="#sort_menu"
           href="#"
         >
           Sort by
           <ion-icon name="chevron-down-outline"></ion-icon></a>
-        <ul id="menu_item3" class="submenu collapse">
-          <li><a class="nav-link" href="#">Submenu item 4 </a></li>
-          <li><a class="nav-link" href="#">Submenu item 5 </a></li>
-          <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-          <li><a class="nav-link" href="#">Submenu item 6 </a></li>
+        <ul id="sort_menu" class="submenu collapse">
+          <li> 
+          <a
+          class="nav-link d-flex justify-content-between fw-bold"
+          data-bs-toggle="collapse"
+          data-bs-target="#sort_by_name_menu"
+          href="#"
+        >
+          Name
+          <ion-icon name="chevron-down-outline"></ion-icon></a>
+            <ul id="sort_by_name_menu" class="submenu collapse">
+                <li><a class="nav-link" href="?sort=name">Ascending name</a></li>
+                <li><a class="nav-link" href="?sort=-name">Descending name</a></li>
+            </ul>
+          </li>
+          <li> 
+          <a
+          class="nav-link d-flex justify-content-between fw-bold"
+          data-bs-toggle="collapse"
+          data-bs-target="#sort_by_price_menu"
+          href="#"
+        >
+          Price
+          <ion-icon name="chevron-down-outline"></ion-icon></a>
+            <ul id="sort_by_price_menu" class="submenu collapse">
+                <li><a class="nav-link" href="?sort=price">Ascending price</a></li>
+                <li><a class="nav-link" href="?sort=-price">Descending price</a></li>
+            </ul>
+          </li>
+          <li> 
+          <a
+          class="nav-link d-flex justify-content-between fw-bold"
+          data-bs-toggle="collapse"
+          data-bs-target="#sort_by_date_menu"
+          href="#"
+        >
+          Date
+          <ion-icon name="chevron-down-outline"></ion-icon></a>
+            <ul id="sort_by_date_menu" class="submenu collapse">
+                <li><a class="nav-link" href="?sort=dateAdded">Ascending date</a></li>
+                <li><a class="nav-link" href="?sort=-dateAdded">Descending date</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
+          
         </ul>
       </li>
     </ul>
