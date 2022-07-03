@@ -1,0 +1,55 @@
+<div class="container mt-5 mb-5">
+  <div class="d-flex justify-content-center row">
+    <div class="d-flex flex-column col-md-8">
+      <div class="coment-bottom bg-white p-2 px-4">
+        {{#if account}}
+          <form
+            action="/api/v1/comments/{{product._id}}"
+            class="mr-3"
+            method="post"
+          >
+            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+              <img
+                class="img-fluid img-responsive rounded-circle mr-2"
+                src="/images/users/avatars/{{account.avatar}}"
+                alt="{{account.username}}"
+                width="38"
+              />
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Add comment"
+                name="content"
+              />
+              <button class="btn btn--black" type="submit">Comment</button>
+            </div>
+          </form>
+        {{else}}
+          <p class="border border-dark">Please log in to comment on this
+            product!</p>
+        {{/if}}
+        <div class="d-flex flex-column">
+          {{#each comments}}
+            <div class="row">
+              <div class="col-md-12 commented-section mt-2">
+                <div class="d-flex flex-row align-items-center commented-user">
+                  <h5 class="mr-2">{{this.user.username}}</h5>
+                </div>
+                <div class="comment-text-sm">
+                  <span>{{this.content}}</span>
+                </div>
+              </div>
+            </div>
+            <br />
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Scripts and stylesheets-->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
