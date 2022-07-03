@@ -5,13 +5,13 @@
         <a
           class="nav-link d-flex justify-content-between fw-bold"
           data-bs-toggle="collapse"
-          data-bs-target="#menu_item1"
+          data-bs-target="#categories_menu"
           href="#"
         >
           Categories
           <ion-icon name="chevron-down-outline"></ion-icon>
         </a>
-        <ul id="menu_item1" class="submenu collapse">
+        <ul id="categories_menu" class="submenu collapse">
           <li><a class="nav-link" href="?category=1">Type 1</a></li>
           <li><a class="nav-link" href="?category=2">Type 2 </a></li>
           <li><a class="nav-link" href="?category=3">Type 3 </a></li>
@@ -41,7 +41,8 @@
           href="#"
         >
           Sort by
-          <ion-icon name="chevron-down-outline"></ion-icon></a>
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </a>
         <ul id="sort_menu" class="submenu collapse">
           <li> 
           <a
@@ -87,12 +88,53 @@
           </li>
 
         </ul>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link d-flex justify-content-between fw-bold"
+          data-bs-toggle="collapse"
+          data-bs-target="#price_range_form"
+          href="#"
+        >
+          Price Range
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </a>
+        <form id="price_range_form" class="collapse">
+            <label for="minPrice">Minimum price:</label><br>
+            <input type="number" id="minPrice" placeholder="0" value=""><br>
+            <label for="maxPrice">Maximum price:</label><br>
+            <input type="number" id="maxPrice" placeholder="0" value=""><br><br>
+            <btn class=" applyPriceRangeButton btn btn--black">Apply</btn>
+        </form>
 
-          
-        </ul>
       </li>
     </ul>
   </nav>
 </aside>
 
 <link rel="stylesheet" href="/css/sidebar.css" />
+<script type="text/javascript">
+  const applyPriceRangeButton = document.querySelector(".applyPriceRangeButton")
+  applyPriceRangeButton.addEventListener("click", ()=>{
+      const minPrice = document.getElementById("minPrice").value||0
+      const maxPrice = document.getElementById("maxPrice").value||0
+      sendPriceRangeQuery(minPrice, maxPrice);
+  })
+
+  const sendPriceRangeQuery = async (minPrice, maxPrice) => {
+    const query = new URL(window.location.href);
+    query.searchParams.set('price[gte]', minPrice);
+    query.searchParams.set('price[lte]', maxPrice);
+    try {
+            await sendRequest(query, {
+            method: "GET",
+        });
+    
+        redirect(query);
+      } catch {
+        console.log("error")
+      }
+};
+
+  
+</script>
