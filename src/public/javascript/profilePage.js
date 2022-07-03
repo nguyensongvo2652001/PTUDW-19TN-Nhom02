@@ -7,6 +7,9 @@ const saveEditProfileButton = profilePage.querySelector(
 const cancelEditProfileButton = profilePage.querySelector(
   ".cancelEditProfileButton"
 );
+const profileMainBoard =  profilePage.querySelector(
+  ".profileMainBoard"
+);
 
 const nameInput = editProfileForm.querySelector("#Username");
 const descriptionInput = editProfileForm.querySelector("#description");
@@ -17,6 +20,7 @@ const avatarInput = editProfileForm.querySelector("#avatar");
 editProfileButton.addEventListener("click", () => {
   document.getElementsByClassName("profileMainBanner")[0].style.height = "140%";
   showElement(editProfileForm);
+  hideElement(profileMainBoard)
 });
 
 saveEditProfileButton.addEventListener("click", () => {
@@ -26,6 +30,7 @@ saveEditProfileButton.addEventListener("click", () => {
 cancelEditProfileButton.addEventListener("click", () => {
   hideElement(editProfileForm);
   document.getElementsByClassName("profileMainBanner")[0].style.height = "";
+  showElement(profileMainBoard)
 });
 
 const updateProfile = async () => {
@@ -48,6 +53,7 @@ const updateProfile = async () => {
     });
 
     hideElement(editProfileForm);
+    showElement(profileMainBoard);
     redirect("/api/v1/users/me");
   } catch {
     console.log("error")
