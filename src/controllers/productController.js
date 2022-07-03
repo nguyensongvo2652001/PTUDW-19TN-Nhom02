@@ -2,6 +2,8 @@ const multer = require("multer");
 const sharp = require("sharp");
 
 const Product = require("../models/productModel");
+const { OrderedProduct } = require("../models/orderModel");
+
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
 const APIFeatures = require("../utils/apiFeatures");
@@ -154,6 +156,7 @@ const updateProduct = catchAsync(async (req, res, next) => {
   });
 
   let product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    runValidators: true,
     new: true,
   });
 
@@ -194,27 +197,6 @@ const getAllProducts = catchAsync(async (req, res, next) => {
   res.render("layouts/main", data);
 });
 
-const getProduct = catchAsync(async (req, res, next) => {
-  var content = null;
-  if (req.user == null) {
-    content = "detailItem";
-  } else {
-    content = "productInspect";
-  }
-  const product = await Product.findById(req.params.id).lean();
-
-  if (!product)
-    return next(new AppError("No products found with the specified id", 404));
-
-  const data = {
-    header: "header",
-    content: content,
-    footer: "footer",
-    product: product,
-  };
-  res.render("layouts/main", data);
-});
-
 const getUserProducts = catchAsync(async (req, res, next) => {
   if (req.user == null) {
     next();
@@ -243,6 +225,34 @@ const getUserProducts = catchAsync(async (req, res, next) => {
   res.render("layouts/main", data);
 });
 
+const getProduct = catchAsync(async (req, res, next) => {
+  var content = null;
+  const product = await Product.findById(req.params.id).lean();
+  if (!product)
+    return next(new AppError("No products found with the specified id", 404));
+  if (req.user == null || !req.user._id.equals(product.seller._id)) {
+    content = "detailItem";
+  } else {
+    content = "productInspect";
+  }
+
+  const data = {
+    header: "header",
+    content: content,
+    footer: "footer",
+    product: product,
+  };
+  res.render("layouts/main", data);
+});
+
+const getStatistics = catchAsync(async (req, res, next) => {
+  const products = await OrderedProduct.find({
+    "product.seller": req.user,
+  }).lean();
+  console.log(products);
+  next();
+});
+
 module.exports = {
   uploadThumbnail,
   resizeAndStoreThumbnail,
@@ -250,6 +260,7 @@ module.exports = {
   getAllProducts,
   getProduct,
   getUserProducts,
+  getStatistics,
   setProductFilterObject,
   verifyProductSeller,
   verifyIfProductForSale,

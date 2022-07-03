@@ -52,7 +52,6 @@ const getUser = catchAsync(async (req, res, next) => {
   if (!user)
     return next(new AppError("Can not find the user with specified id", 404));
   const hasLoggedIn = req.user != null;
-  //////////////// TEST HANDLEBARS USERPROFILE SELLERPROFILE /////////////////////////////////////
   const data = {
     header: "header",
     footer: "footer",
@@ -62,13 +61,6 @@ const getUser = catchAsync(async (req, res, next) => {
     asideProfile: hasLoggedIn,
   };
   res.render("layouts/main", data);
-  //console.log(user.id)
-  //res.status(200).json({
-  //status: "success",
-  //data: { user },
-  //});
-
-  //////////////// END TEST HANDLEBARS USERPROFILE SELLERPROFILE /////////////////////////////////////
 });
 
 const updateMe = catchAsync(async (req, res, next) => {
