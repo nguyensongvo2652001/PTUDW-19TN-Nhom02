@@ -186,7 +186,7 @@ const getAllProducts = catchAsync(async (req, res, next) => {
     .filter()
     .sort();
   const products = await features.queryObj;
-  console.log(req.user);
+
   const data = {
     header: req.user == null ? "unauthenticatedHeader" : "header",
     content: "homePage",
@@ -199,9 +199,9 @@ const getAllProducts = catchAsync(async (req, res, next) => {
 
 const getUserProducts = catchAsync(async (req, res, next) => {
   if (req.user == null) {
-    next();
+    return next();
   }
-  const products = await Product.find({ seller: req.user }).lean();
+  const products = await Product.find({ seller: req.user._id }).lean();
 
   if (!products)
     return next(new AppError("No products found with the specified id", 404));
@@ -236,11 +236,58 @@ const getProduct = catchAsync(async (req, res, next) => {
 });
 
 const getStatistics = catchAsync(async (req, res, next) => {
-  const products = await OrderedProduct.find({
-    "product.seller": req.user,
-  }).lean();
-  console.log(products);
-  next();
+  const orderedProducts = await OrderedProduct.find({ seller: req.user._id });
+  const statisticsByMonths = await OrderedProduct.aggregate([
+    {
+      $lookup: {
+        from: "products",
+        localField: "product",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+    {
+      $unwind: "$product",
+    },
+    {
+      $match: { "product.seller": req.user._id },
+    },
+    {
+      $group: {
+        _id: { $month: "$dateOrdered" },
+        numProducts: { $sum: "$count" }, // số hàng bán được trong tháng đó
+        total: { $sum: { $multiply: ["$product.price", "$count"] } }, //tổng số tiền bán được trong tháng đó
+      },
+    },
+    {
+      $addFields: { month: "$_id" },
+    },
+  ]);
+
+  const statisticsByProducts = await OrderedProduct.aggregate([
+    {
+      $lookup: {
+        from: "products",
+        localField: "product",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+    {
+      $unwind: "$product",
+    },
+    {
+      $match: { "product.seller": req.user._id },
+    },
+    {
+      $group: {
+        _id: "$product._id",
+        numProducts: { $sum: "$count" }, //số hàng mà product này bán được
+        total: { $sum: { $multiply: ["$product.price", "$count"] } }, //tổng số tiền thu được từ product này
+      },
+    },
+  ]);
+  // next();
 });
 
 module.exports = {
