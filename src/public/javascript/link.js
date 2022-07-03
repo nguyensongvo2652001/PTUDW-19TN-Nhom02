@@ -25,7 +25,7 @@ const clickElement = (el, link) => {
 clickElement(headerMainIcon, "/api/v1/products");
 clickElement(headerHomeIcon, "/api/v1/products");
 clickElement(headerProfileIcon, "/api/v1/users/me");
-clickElement(headerCartIcon, "/cart");
+clickElement(headerCartIcon, "/api/v1/orders/checkout");
 
 clickElement(productProfileLink, "/api/v1/users/me");
 clickElement(productManagerProfileLink, "/api/v1/users/me/products");
@@ -33,3 +33,9 @@ clickElement(profitProfileLink, "/api/v1/users/me/statistics");
 
 clickElement(loginLinkButton, "/api/v1/users/login");
 clickElement(signupLinkButton, "/api/v1/users/signUp");
+
+//Cart
+const cartHistory = document.querySelector(".order__cart-profile-link");
+const orderHistory = document.querySelector(".order__history-profile-link");
+clickElement(cartHistory, "/api/v1/orders/checkout");
+clickElement(orderHistory, "/api/v1/orders/history");

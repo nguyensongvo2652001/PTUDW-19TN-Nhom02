@@ -16,10 +16,28 @@
   background-color: rgb(222, 226, 230);
 }
 
+.cartBackPageText {
+  display: flex;
+  flex-direction: row;
+}
+
+.backToShopText {
+  margin-top: 0.5rem;
+}
+
+.cartCheckout {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkoutText {
+  margin-top: 0.5rem;
+}
+
 .checkOutMainBoard {
   background-color: white;
   border-radius: 24px;
-  width: 70%;
+  width: 100%;
 }
 
 
