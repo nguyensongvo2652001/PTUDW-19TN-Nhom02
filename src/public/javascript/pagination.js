@@ -9,7 +9,11 @@ const addFunctionalitiesToPaginations = () => {
    
 const addFunctionalitiesToPageItems = (pagination) => {
     const pageItems = pagination.querySelectorAll(".page-link");
-    if (window.location.href.includes("users")) {
+    if (window.location.href.indexOf("page") === -1)
+    {
+        pageItems[0].classList.add("active")
+    }
+    else if (window.location.href.includes("users")) {
         pageItems[Number(curPageUserProduct)-1].classList.add("active")
     } else {
         pageItems[Number(curPageAllProduct)-1].classList.add("active")
