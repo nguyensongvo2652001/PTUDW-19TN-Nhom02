@@ -43,7 +43,11 @@ router.route("/:id").get(userController.getUser);
 
 router
   .route("/me/products")
-  .get(authController.checkUser, productController.getUserProducts);
+  .get(
+    authController.checkUser,
+    productController.getUserProducts,
+    authController.redirect
+  );
 router.use("/:sellerId/products", productRouter);
 
 module.exports = router;

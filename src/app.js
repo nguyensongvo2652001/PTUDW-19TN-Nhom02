@@ -1,4 +1,5 @@
 const express = require("express");
+const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
 const expressHBS = require("express-handlebars");
 
@@ -26,6 +27,7 @@ app.set("views", "./views");
 // End handlebars
 
 app.use(express.json()); // for json
+app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: true })); // for form data
 app.use(express.static(path.join(__dirname, "public")));
 
