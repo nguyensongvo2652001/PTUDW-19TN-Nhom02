@@ -39,17 +39,7 @@ const redirectIfLogin = (req, res, next) => {
   return next();
 };
 
-const cartViewController = (req, res, next) => {
-  const data = {
-    header: "header",
-    content: "cart",
-    footer: "footer",
-  };
-  res.render("layouts/main", data);
-};
-
 module.exports = {
-  cartViewController,
   isLogin,
   redirectIfLogin,
   redirectIfNotLogin,

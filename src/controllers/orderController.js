@@ -74,14 +74,7 @@ const createOrder = catchAsync(async (req, res, next) => {
   req.user.account -= order.totalPrice;
   await req.user.save();
 
-  res.status(201).json({
-    status: "success",
-    data: {
-      order,
-      checkout,
-      orderedProducts,
-    },
-  });
+  res.redirect("/api/v1/orders");
 });
 
 const getOrdersHistory = catchAsync(async (req, res, next) => {
@@ -94,11 +87,25 @@ const getOrdersHistory = catchAsync(async (req, res, next) => {
     .sort();
   const products = await features.queryObj;
 
-  res.status(200).json({
-    status: "success",
-    length: products.length,
-    data: { products },
-  });
+  const data = {
+    name: "Your orders",
+    header: "header",
+    content: "order",
+    display: "orderHistory",
+    footer: "footer",
+  };
+  res.render("layouts/main", data);
 });
 
-module.exports = { createOrder, getOrdersHistory };
+const getCart = (req, res, next) => {
+  const data = {
+    name: "Shopping cart",
+    header: "header",
+    content: "order",
+    display: "cartHistory",
+    footer: "footer",
+  };
+  res.render("layouts/main", data);
+};
+
+module.exports = { createOrder, getOrdersHistory, getCart };

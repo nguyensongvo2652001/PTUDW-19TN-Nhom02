@@ -1,0 +1,12 @@
+<main class="container-fluid homepage-container">
+  <div class="row checkOutPageName">{{name}}</div>
+  <section class="section-content">
+    <div class="row">
+      {{>asideOrder}}
+      {{> (lookup . 'display') }}
+    </div>
+  </section>
+</main>
+
+<link rel="stylesheet" href="/css/checkOutPage.css" />
+<link rel="stylesheet" href="/css/detail-item.css" />

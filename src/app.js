@@ -38,7 +38,7 @@ app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/orders", orderRouter);
-app.use("/", viewRouter);
+// app.use("/", viewRouter);
 app.all("*", async (req, res, next) => {
   return next(new AppError("Can not find the specified url!", 404));
 });

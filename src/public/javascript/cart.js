@@ -2,7 +2,7 @@ const getCartItemHTML = (
   idx,
   product,
   id
-) => `<li class="cart__item" data-id = ${id}>
+) => `<li class="py-3 cart__item" data-id = ${id}>
   <div class="cart__item-image-container">
     <img src="/images/products/thumbnails/${product.thumbnail}" alt="Item image" class="cart__item-image" />
   </div>
