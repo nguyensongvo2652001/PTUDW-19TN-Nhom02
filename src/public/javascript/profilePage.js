@@ -33,7 +33,7 @@ const updateProfile = async () => {
     data["phoneNumber"] = phoneNumberInput.value;
     data["storeName"] = shopNameInput.value;
 
-    console.log(data);
+
 
     const formData = new FormData();
     Object.keys(data).forEach((key) => formData.append(key, data[key]));
@@ -46,6 +46,6 @@ const updateProfile = async () => {
     hideElement(editProfileForm);
     redirect("/api/v1/users/me");
   } catch {
-    showAlert("error", "Something went wrong", 2 * 1000);
+    console.log("error")
   }
 };
