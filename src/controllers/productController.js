@@ -178,9 +178,9 @@ const getAllProducts = catchAsync(async (req, res, next) => {
     req.query
   )
     .filter()
-    .sort();
+    .sort()
+    .paginate();
   const products = await features.queryObj;
-  console.log(req.user);
   const data = {
     header: req.user == null ? "unauthenticatedHeader" : "header",
     content: "homePage",
@@ -214,14 +214,23 @@ const getUserProducts = catchAsync(async (req, res, next) => {
   }
   const products = await Product.find({ seller: req.user }).lean();
 
+
   if (!products)
     return next(new AppError("No products found with the specified id", 404));
+  
+  //Them
+  const features = new APIFeatures(
+    products,
+    req.query
+  ).paginate()
+
+  productsPaged = await features.queryObj;
 
   const data = {
     header: "header",
     content: "productManager",
     footer: "footer",
-    products: products,
+    products: productsPaged,
   };
   res.render("layouts/main", data);
 });
