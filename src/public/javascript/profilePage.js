@@ -1,28 +1,32 @@
-const profilePage = document.querySelector(".profilePage")
-const editProfileForm = profilePage.querySelector(".popupProfileForm")
-const editProfileButton = profilePage.querySelector(".editProfileButton")
-const saveEditProfileButton = profilePage.querySelector(".saveEditProfileButton")
-const cancelEditProfileButton = profilePage.querySelector(".cancelEditProfileButton")
+const profilePage = document.querySelector(".profilePage");
+const editProfileForm = profilePage.querySelector(".popupProfileForm");
+const editProfileButton = profilePage.querySelector(".editProfileButton");
+const saveEditProfileButton = profilePage.querySelector(
+  ".saveEditProfileButton"
+);
+const cancelEditProfileButton = profilePage.querySelector(
+  ".cancelEditProfileButton"
+);
 
-const nameInput = editProfileForm.querySelector("#Username")
-const descriptionInput = editProfileForm.querySelector("#description")
-const phoneNumberInput = editProfileForm.querySelector("#PhoneNumber")
-const shopNameInput = editProfileForm.querySelector("#shopName")
-const avatarInput = editProfileForm.querySelector("#avatar")
+const nameInput = editProfileForm.querySelector("#Username");
+const descriptionInput = editProfileForm.querySelector("#description");
+const phoneNumberInput = editProfileForm.querySelector("#PhoneNumber");
+const shopNameInput = editProfileForm.querySelector("#shopName");
+const avatarInput = editProfileForm.querySelector("#avatar");
 
 editProfileButton.addEventListener("click", () => {
-    document.getElementsByClassName("profileMainBanner")[0].style.height = "140%"
-    showElement(editProfileForm)
-})
+  document.getElementsByClassName("profileMainBanner")[0].style.height = "140%";
+  showElement(editProfileForm);
+});
 
 saveEditProfileButton.addEventListener("click", () => {
-    updateProfile()
-})
+  updateProfile();
+});
 
 cancelEditProfileButton.addEventListener("click", () => {
   hideElement(editProfileForm);
-  document.getElementsByClassName("profileMainBanner")[0].style.height = ""
-})
+  document.getElementsByClassName("profileMainBanner")[0].style.height = "";
+});
 
 const updateProfile = async () => {
   try {
@@ -49,3 +53,5 @@ const updateProfile = async () => {
     showAlert("error", "Something went wrong", 2 * 1000);
   }
 };
+
+console.log("???");

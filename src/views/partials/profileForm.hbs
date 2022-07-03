@@ -1,12 +1,17 @@
 <div class="profileContent m-4 col-lg-6 bg-light">
-  <form class="formProfile">
+  <form
+    class="formProfile"
+    action="/api/v1/users/me?_method=PATCH"
+    enctype="multipart/form-data"
+    method="post"
+  >
     <div class="nameField">
       <label for="Username" class="form-label">Họ và Tên:</label>
       <input
         type="text"
         class="form-control mt-2"
         id="Username"
-        name="Username"
+        name="username"
         value=" {{user.username}}"
         required
       />
@@ -31,8 +36,8 @@
         type="tel"
         class="form-control mt-2"
         id="PhoneNumber"
-        name="PhoneNumber"
-        pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+        name="phoneNumber"
+        pattern="[0-9]{10}"
         value="{{user.phoneNumber}}"
         required
       />
@@ -43,7 +48,7 @@
         type="text"
         class="form-control mt-2"
         id="shopName"
-        name="shopName"
+        name="storeName"
         value="{{user.storeName}}"
         required
       />

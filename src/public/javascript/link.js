@@ -22,13 +22,6 @@ const clickElement = (el, link) => {
   });
 };
 
-//Cart
-const cartBackToShopping = document.querySelector(".cartBackPageText");
-const cartCheckout = document.querySelector(".cartCheckout");
-clickElement(cartBackToShopping, "api/v1/products");
-clickElement(cartCheckout, "/api/v1/");
-//
-
 clickElement(headerMainIcon, "/api/v1/products");
 clickElement(headerHomeIcon, "/api/v1/products");
 clickElement(headerProfileIcon, "/api/v1/users/me");

@@ -1,4 +1,5 @@
 const getCartItemHTML = (
+  idx,
   product,
   id
 ) => `<li class="cart__item" data-id = ${id}>
@@ -17,8 +18,10 @@ const getCartItemHTML = (
         class="basic-info__counter-input"
         type="number"
         value="${product.count}"
+        name="products[${idx}][count]"
         required
       />
+      <input type="hidden" name="products[${idx}][product]" value="${id}">
       <button class="basic-info__counter-btn basic-info__counter-plus">
         +
       </button>
@@ -83,7 +86,7 @@ const addFunctionalitiesToCartItem = (cartItem, productId) => {
 };
 
 const cartItemsHTML = Object.keys(cart)
-  .map((id) => getCartItemHTML(cart[id], id))
+  .map((id, idx) => getCartItemHTML(idx, cart[id], id))
   .join("\n");
 
 cartList.insertAdjacentHTML("beforeend", cartItemsHTML);
