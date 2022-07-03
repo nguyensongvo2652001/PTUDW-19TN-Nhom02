@@ -40,16 +40,13 @@
   width: 100%;
 }
 
-
 .checkOutContent {
   display: flex;
   flex-direction: column;
 }
 
-
-
 .formCheckOut {
-  width: 60%;
+  width: 80%;
   font-weight: bold;
 }
 
@@ -231,20 +228,20 @@
   margin-bottom: 0 !important;
 }
 
-.cartBackPageText{
+.cartBackPageText {
   display: flex;
   flex-direction: row;
 }
 
-.backToShopText{
+.backToShopText {
   margin-top: 0.5rem;
 }
 
-.cartCheckout{
+.cartCheckout {
   display: flex;
   flex-direction: row;
 }
 
-.checkoutText{
+.checkoutText {
   margin-top: 0.5rem;
 }
