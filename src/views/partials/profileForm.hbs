@@ -1,73 +1,55 @@
-<div class="profileContent m-4 col-lg-6 bg-light">
-  <form
-    class="formProfile"
-    action="/api/v1/users/me?_method=PATCH"
-    enctype="multipart/form-data"
-    method="post"
-  >
-    <div class="nameField">
-      <label for="Username" class="form-label">Họ và Tên:</label>
-      <input
-        type="text"
-        class="form-control mt-2"
-        id="Username"
-        name="username"
-        value=" {{user.username}}"
-        required
-      />
-    </div>
-    <div class="descriptionField">
-      <label for="description" class="form-label">Miêu tả:</label>
-      <textarea
-        id="w3review"
-        name="w3review"
-        rows="10"
-        cols="50"
-        class="form-control mt-2"
-        id="description"
-        name="description"
-      >
-        {{user.description}}
-      </textarea>
-    </div>
-    <div class="userphoneField">
-      <label for="PhoneNumber">Số điện thoại:</label>
-      <input
-        type="tel"
-        class="form-control mt-2"
-        id="PhoneNumber"
-        name="phoneNumber"
-        pattern="[0-9]{10}"
-        value="{{user.phoneNumber}}"
-        required
-      />
-    </div>
-    <div class="shopNameField">
-      <label for="shopName">Tên cửa hàng:</label>
-      <input
-        type="text"
-        class="form-control mt-2"
-        id="shopName"
-        name="storeName"
-        value="{{user.storeName}}"
-        required
-      />
-    </div>
-    <div class="avatarField">
-      <label for="avatar">Avatar:</label>
-      <input
-        type="file"
-        class="form-control mt-2"
-        id="avatar"
-        name="avatar"
-        accept="image/*"
-      />
-    </div>
-    <div class="saveButtonDiv m-4">
-      <button type="submit" class="saveButton btn btn-dark">Save</button>
-    </div>
-    <div class="saveButtonDiv m-4">
-      <button type="button" class="cancel btn btn-dark">Cancel</button>
-    </div>
-  </form>
-</div>
+   <form  class="formProfile m-4 col-lg-6 bg-light popupProfileForm hidden">
+        <div class="nameField">
+          <label for="Username" class="form-label">Họ và Tên:</label>
+          <input
+            type="text"
+            class="form-control mt-2"
+            id="Username"
+            name="Username"
+            value="{{user.username}}"
+            required
+          />
+        </div>
+        <div class="descriptionField">
+          <label for="description" class="form-label">Miêu tả:</label>
+          <textarea
+            rows="10"
+            cols="50"
+            class="form-control mt-2"
+            id="description"
+            name="description"
+            value="{{user.description}}"
+          >
+          </textarea>
+        </div>
+        <div class="userphoneField">
+          <label for="PhoneNumber">Số điện thoại:</label>
+          <input type="tel" class="form-control mt-2" id="PhoneNumber"
+          name="PhoneNumber" pattern="[0-9]{10}" value="{{user.phoneNumber}}">
+        </div>
+        <div class="shopNameField">
+          <label for="shopName">Tên cửa hàng:</label>
+          <input
+            type="text"
+            class="form-control mt-2"
+            id="shopName"
+            name="shopName" 
+            value="{{user.storeName}}"/>
+        </div>
+        <div class="avatarField">
+          <label for="avatar">Avatar:</label>
+          <input
+            type="file"
+            class="form-control mt-2"
+            id="avatar"
+            name="avatar"
+            accept="image/*"
+          />
+        </div>
+        <div class="saveButtonDiv m-4">
+          <button type="submit" class="saveEditProfileButton btn btn--black">Save</button>
+        </div>
+        <div class="cancelButtonDiv m-4">
+          <button type="button" class="cancelEditProfileButton btn btn--black">Cancel</button>
+        </div>
+  </form> 

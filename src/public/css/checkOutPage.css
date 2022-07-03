@@ -22,11 +22,14 @@
   width: 70%;
 }
 
+
 .checkOutContent {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+
 
 .formCheckOut {
   width: 60%;
@@ -174,6 +177,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: auto;
   gap: 3rem;
 }
 
@@ -190,6 +194,7 @@
 }
 
 .cart__item-image {
+  margin-top: 2rem;
   height: 8rem;
   width: 8rem;
   border-radius: 10px;
@@ -207,4 +212,22 @@
 
 .cart__item * {
   margin-bottom: 0 !important;
+}
+
+.cartBackPageText{
+  display: flex;
+  flex-direction: row;
+}
+
+.backToShopText{
+  margin-top: 0.5rem;
+}
+
+.cartCheckout{
+  display: flex;
+  flex-direction: row;
+}
+
+.checkoutText{
+  margin-top: 0.5rem;
 }
