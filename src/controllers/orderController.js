@@ -86,13 +86,14 @@ const getOrdersHistory = catchAsync(async (req, res, next) => {
     .filter()
     .sort();
   const products = await features.queryObj;
-
+  console.log(products);
   const data = {
     name: "Your orders",
     header: "header",
     content: "order",
     display: "orderHistory",
     footer: "footer",
+    products: products,
   };
   res.render("layouts/main", data);
 });

@@ -1,0 +1,35 @@
+<section class="checkOutMainBanner col-lg-6">
+  <div class="cartPage checkOutMainBoard m-4">
+    <div class="checkOutContent">
+      <ul class="order__list">
+        {{#each products}}
+          <li class="d-flex justify-content-between py-3" data-id="${id}">
+            <div class="cart__item-image-container">
+              <img
+                src="/images/products/thumbnails/{{this.product.thumbnail}}"
+                alt="Item image"
+                class="cart__item-image"
+              />
+            </div>
+            <div class="p-3">
+              <p>Name</p>
+              <p class="cart__item-name">{{this.product.name}}</p>
+            </div>
+
+            <div class="p-3">
+              <p>Total price</p>
+              <p class="cart__item-price">{{this.totalPrice}}</p>
+            </div>
+
+            <div class="p-3">
+              <p>Count</p>
+              <p class="cart__item-count">{{this.count}}</p>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="/css/checkOutPage.css" />
