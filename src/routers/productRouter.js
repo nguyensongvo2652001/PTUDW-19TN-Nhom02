@@ -1,6 +1,7 @@
 const express = require("express");
 
 const productController = require("../controllers/productController");
+const commentController = require("../controllers/commentController");
 const authController = require("../controllers/authController");
 
 const router = express.Router({ mergeParams: true });
@@ -22,6 +23,7 @@ router
   .route("/:id")
   .get(
     authController.checkUser,
+    commentController.getComments,
     productController.setProductFilterObject,
     productController.getProduct
   )

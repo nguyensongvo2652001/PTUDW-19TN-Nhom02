@@ -6,9 +6,9 @@ const expressHBS = require("express-handlebars");
 const errorController = require("./controllers/errorController");
 const userRouter = require("./routers/userRouter");
 const productRouter = require("./routers/productRouter");
+const commentRouter = require("./routers/commentRouter");
 const orderRouter = require("./routers/orderRouter");
 const searchRouter = require("./routers/searchRouter");
-const viewRouter = require("./routers/viewRouter");
 const AppError = require("./utils/appError");
 
 const path = require("path");
@@ -20,6 +20,10 @@ const hbs = expressHBS.create({
   partialsDir: path.join(__dirname, "./views/partials"),
   defaultLayout: "main",
   extname: "hbs",
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
 });
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
@@ -38,6 +42,8 @@ app.use("/api/v1/search", searchRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
 app.use("/api/v1/orders", orderRouter);
+app.use("/api/v1/comments", commentRouter);
+
 // app.use("/", viewRouter);
 app.all("*", async (req, res, next) => {
   return next(new AppError("Can not find the specified url!", 404));

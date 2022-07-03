@@ -25,13 +25,7 @@ const createAndSendToken = async (args) => {
     secure: req.secure || req.header("x-forwarded-proto") === "https",
   });
 
-  res.status(statusCode).json({
-    status: "success",
-    data: {
-      user,
-      token,
-    },
-  });
+  res.redirect("/api/v1/products");
 };
 
 const login = catchAsync(async (req, res, next) => {

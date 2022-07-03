@@ -239,8 +239,10 @@ const getProduct = catchAsync(async (req, res, next) => {
 
   const data = {
     header: "header",
-    content: content,
     footer: "footer",
+    content: content,
+    account: req.user,
+    comments: req.comments,
     product: product,
   };
   res.render("layouts/main", data);
@@ -274,7 +276,6 @@ const getStatistics = catchAsync(async (req, res, next) => {
       $addFields: { month: "$_id" },
     },
   ]);
-
   const statisticsByProducts = await OrderedProduct.aggregate([
     {
       $lookup: {
@@ -298,6 +299,8 @@ const getStatistics = catchAsync(async (req, res, next) => {
       },
     },
   ]);
+  console.log(statisticsByMonths);
+  console.log(statisticsByProducts);
   // next();
 });
 
