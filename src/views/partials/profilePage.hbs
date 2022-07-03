@@ -1,6 +1,6 @@
 <div class="profilePage">
   <div class="profilePageName">PROFILE</div>
-  <section class="profileMainBanner container-fluid row">
+  <section class="profileMainBanner container-fluid  justify-content-start">
     {{#if asideProfile}}
     {{>asideProfile}}
     {{/if}}
@@ -40,66 +40,78 @@
           </div>
           {{/if}}
         </div>
-        <form  class="formProfile popupProfileForm hidden">
-              <div class="nameField">
-                <label for="Username" class="form-label">Họ và Tên:</label>
-                <input
-                  type="text"
-                  class="form-control mt-2"
-                  id="Username"
-                  name="Username"
-                  value="{{user.username}}"
-                  required
-                />
-              </div>
-              <div class="descriptionField">
-                <label for="description" class="form-label">Miêu tả:</label>
-                <textarea
-                  rows="10"
-                  cols="50"
-                  class="form-control mt-2"
-                  id="description"
-                  name="description"
-                  value="{{user.description}}"
-                >
-                </textarea>
-              </div>
-              <div class="userphoneField">
-                <label for="PhoneNumber">Số điện thoại:</label>
-                <input type="tel" class="form-control mt-2" id="PhoneNumber"
-                name="PhoneNumber" pattern="[0-9]{10}" value="{{user.phoneNumber}}">
-              </div>
-              <div class="shopNameField">
-                <label for="shopName">Tên cửa hàng:</label>
-                <input
-                  type="text"
-                  class="form-control mt-2"
-                  id="shopName"
-                  name="shopName" 
-                  value="{{user.storeName}}"/>
-              </div>
-              <div class="avatarField">
-                <label for="avatar">Avatar:</label>
-                <input
-                  type="file"
-                  class="form-control mt-2"
-                  id="avatar"
-                  name="avatar"
-                  accept="image/*"
-                />
-              </div>
-              <div class="saveButtonDiv m-4">
-                <button type="submit" class="saveEditProfileButton btn btn--black">Save</button>
-              </div>
-              <div class="cancelButtonDiv m-4">
-                <button type="button" class="cancelEditProfileButton btn btn--black">Cancel</button>
-              </div>
-        </form>
       </div>
     </div>
+    {{>profileForm}}
   </section>
+  {{!-- <form  class="formProfile popupProfileForm hidden">
+        <div class="nameField">
+          <label for="Username" class="form-label">Họ và Tên:</label>
+          <input
+            type="text"
+            class="form-control mt-2"
+            id="Username"
+            name="Username"
+            value="{{user.username}}"
+            required
+          />
+        </div>
+        <div class="descriptionField">
+          <label for="description" class="form-label">Miêu tả:</label>
+          <textarea
+            rows="10"
+            cols="50"
+            class="form-control mt-2"
+            id="description"
+            name="description"
+            value="{{user.description}}"
+          >
+          </textarea>
+        </div>
+        <div class="userphoneField">
+          <label for="PhoneNumber">Số điện thoại:</label>
+          <input type="tel" class="form-control mt-2" id="PhoneNumber"
+          name="PhoneNumber" pattern="[0-9]{10}" value="{{user.phoneNumber}}">
+        </div>
+        <div class="shopNameField">
+          <label for="shopName">Tên cửa hàng:</label>
+          <input
+            type="text"
+            class="form-control mt-2"
+            id="shopName"
+            name="shopName" 
+            value="{{user.storeName}}"/>
+        </div>
+        <div class="avatarField">
+          <label for="avatar">Avatar:</label>
+          <input
+            type="file"
+            class="form-control mt-2"
+            id="avatar"
+            name="avatar"
+            accept="image/*"
+          />
+        </div>
+        <div class="saveButtonDiv m-4">
+          <button type="submit" class="saveEditProfileButton btn btn--black">Save</button>
+        </div>
+        <div class="cancelButtonDiv m-4">
+          <button type="button" class="cancelEditProfileButton btn btn--black">Cancel</button>
+        </div>
+  </form> --}}
   </div>
 </div>
 
 
-<script src="/javascript/profilePage.js"  type="text/javascript" ></script>
+<link rel="stylesheet" href="/css/profilePage.css"/>
+<script type="text/javascript">
+  const edit = document.querySelector(".editProfileButton"); 
+  const display = document.querySelector(".profileMainBoard");
+  const form = document.querySelector(".formProfile");
+  const cancel = document.querySelector(".cancel");
+
+  hideElement(form);
+
+  cancel.addEventListener("click", () => {hideElement(form); showElement(display);});
+  edit.addEventListener("click", () => {showElement(form); hideElement(display);});
+</script>
