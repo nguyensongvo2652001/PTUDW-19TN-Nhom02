@@ -276,7 +276,7 @@ const getStatistics = catchAsync(async (req, res, next) => {
       $addFields: { month: "$_id" },
     },
   ]);
-  const statisticsByProducts = await OrderedProduct.aggregate([
+  const statisticsByCategories = await OrderedProduct.aggregate([
     {
       $lookup: {
         from: "products",
@@ -293,15 +293,44 @@ const getStatistics = catchAsync(async (req, res, next) => {
     },
     {
       $group: {
-        _id: "$product._id",
+        _id: "$product.category",
         numProducts: { $sum: "$count" }, //số hàng mà product này bán được
         total: { $sum: { $multiply: ["$product.price", "$count"] } }, //tổng số tiền thu được từ product này
       },
     },
+    {
+      $addFields: { category: "$_id" },
+    },
   ]);
-  console.log(statisticsByMonths);
-  console.log(statisticsByProducts);
-  // next();
+  const relaxedByMonths = {
+    labels: Array.from({ length: 12 }, (_, i) => i + 1),
+    data: Array(12).fill(0),
+  };
+  const relaxedByCategories = {
+    labels: [],
+    data: [],
+  };
+
+  statisticsByMonths.forEach((item) => {
+    relaxedByMonths.data[item.month - 1] = item.total;
+  });
+
+  statisticsByCategories.forEach((item, idx) => {
+    relaxedByCategories.labels[idx] = item.category;
+    relaxedByCategories.data[idx] = item.total;
+  });
+
+  const statistics = {
+    monthly: relaxedByMonths,
+    categories: relaxedByCategories,
+  };
+  const data = {
+    header: "header",
+    footer: "footer",
+    content: "statistics",
+    statistics: JSON.stringify(statistics),
+  };
+  res.render("layouts/main", data);
 });
 
 module.exports = {
