@@ -219,17 +219,18 @@ const getUserProducts = catchAsync(async (req, res, next) => {
   if (req.user == null) {
     next();
   }
-  const products = await Product.find({ seller: req.user }).lean();
 
+  const products = await Product.find({ seller: req.user }).lean();
 
   if (!products)
     return next(new AppError("No products found with the specified id", 404));
   
-  //Them
-  const features = new APIFeatures(
-    products,
-    req.query
-  ).paginate()
+    //Them
+    const features = new APIFeatures(
+      Product.find({ seller: req.user }).lean(),
+      req.query
+    ).filter().sort().paginate()
+  
 
   productsPaged = await features.queryObj;
 

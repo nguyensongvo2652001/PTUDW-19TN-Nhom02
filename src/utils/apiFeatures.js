@@ -41,7 +41,7 @@ module.exports = class APIFeatures {
 
   paginate() {
     const page = Number(this.query.page) || 1;
-    const limit = Number(this.query.limit) || 1;
+    const limit = Number(this.query.limit) || 2;
     const skip = (page - 1) * limit;
     this.queryObj = this.queryObj.skip(skip).limit(limit);
 

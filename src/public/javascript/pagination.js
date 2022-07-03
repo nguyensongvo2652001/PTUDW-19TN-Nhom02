@@ -1,32 +1,49 @@
 const paginations = document.querySelectorAll(".pagination")
-
-
+const curPageUserProduct = localStorage.getItem("curPageUserProduct") || "1"
+const curPageAllProduct = localStorage.getItem("curPageAllProduct") || "1"
 const addFunctionalitiesToPaginations = () => {
-    console.log("hello1")
     paginations.forEach((pagination) => {
-          addFunctionalitiesToPageItem(pagination);
+          addFunctionalitiesToPageItems(pagination);
         });
 }
    
 const addFunctionalitiesToPageItems = (pagination) => {
-    console.log("hello2")
-    const pageItems = pagination.querySelectorAll("page-item");
+    const pageItems = pagination.querySelectorAll(".page-link");
+    if (window.location.href.includes("users")) {
+        pageItems[Number(curPageUserProduct)-1].classList.add("active")
+    } else {
+        pageItems[Number(curPageAllProduct)-1].classList.add("active")
+    }
     pageItems.forEach((pageItem) => {
         addFunctionalitiesToPageItem(pageItem)
     })
 }
 
-const addFunctionalitiesToPageItem = (pageItem) => {
-    console.log("hello3")
-    pageItem.addEventListener("click", function (e)  {
-        const pageLink  = e.target.querySelector("page-link")
-        const pageNumber = pageLink.innerText
+const addFunctionalitiesToPageItem = (pageItem, curPage) => {
+    pageItem.addEventListener("click", function (e) {
+        let pageNumber = e.target.innerText
+        if (window.location.href.includes("users")) {
+            localStorage.setItem("curPageUserProduct", pageNumber)
+        } else {
+            localStorage.setItem("curPageAllProduct", pageNumber)
+        }
         updatePage(pageNumber)
     })
 }
 
 const updatePage = async (pageNumber) => {
-    await sendRequest(window.location.href+"page="+String(pageNumber), {
-        method: "GET",
-      });
-}
+    const query = new URL(window.location.href);
+    query.searchParams.set('page', pageNumber);
+    try {
+            await sendRequest(query, {
+            method: "GET",
+        });
+    
+        redirect(query);
+      } catch {
+        console.log("error")
+      }
+};
+
+
+addFunctionalitiesToPaginations()
