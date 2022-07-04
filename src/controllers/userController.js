@@ -121,5 +121,6 @@ module.exports = {
   resizeAndStoreAvatar,
   updateMe,
   getUser,
+  bufferAccount,
   updateAccount,
 };
