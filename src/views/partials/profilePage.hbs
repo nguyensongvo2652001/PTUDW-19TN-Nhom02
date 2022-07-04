@@ -1,12 +1,12 @@
 <div class="profilePage">
   <div class="profilePageName">PROFILE</div>
-  <section class="profileMainBanner container-fluid  justify-content-start">
+  <section class="profileMainBanner container-fluid  justify-content-start mt-3">
     {{#if asideProfile}}
     {{>asideProfile}}
     {{/if}}
     <div class="profileMainBoard m-4 col-lg-6">
       <div class="profileContent m-4">
-        <div>
+        <div class="main-display">
           <div class="profile__avatar-container">
             <img
               class="profile__avatar"
@@ -40,9 +40,9 @@
           </div>
           {{/if}}
         </div>
+        {{>profileForm}}
       </div>
     </div>
-    {{>profileForm}}
   </section>
   </div>
 </div>

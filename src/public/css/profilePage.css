@@ -31,7 +31,9 @@
 }
 
 .formProfile {
-  width: 60%;
+  /* THINH ADD VI DESCRIPTON NHO QUA SE BI LECH */
+  justify-content: center;
+  width: 80% !important;
   font-weight: bold;
 }
 
@@ -132,12 +134,3 @@
   display: flex;
   justify-content: center;
 }
-
-.popupProfileForm {
-  padding: 4px;
-  position: absolute;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  left: 20%;
-}
-
