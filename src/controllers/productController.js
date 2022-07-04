@@ -10,12 +10,16 @@ const APIFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
 const { filterObject } = require("../utils/helpers");
 
+const createErrorPage = require("../utils/errorFactory")
+
 const storage = multer.memoryStorage();
 
 function fileFilter(req, file, cb) {
   const fileType = file.mimetype.split("/")[0];
   const { fieldname } = file;
   if (fileType !== "image")
+  {
+    createErrorPage(req,res,"Input file must be an image. Please try another file",400)
     return cb(
       new AppError(
         `
@@ -24,6 +28,7 @@ function fileFilter(req, file, cb) {
       ),
       false
     );
+    }
   cb(null, true);
 }
 
@@ -70,6 +75,7 @@ const addProduct = catchAsync(async (req, res, next) => {
   if (!thumbnail) {
     // If there is no thumbnail then we also need to delete the product (all product MUST have a thumbnail)
     await Product.findByIdAndDelete(product._id);
+    createErrorPage(req,res,"A product must have a thumbnail",400)
     return next(new AppError("A product must have a thumbnail", 400));
   }
 
@@ -93,7 +99,11 @@ const setProductFilterObject = catchAsync(async (req, res, next) => {
     //Check if the user with the specified id exists
     const user = await User.findById(req.params.sellerId);
     if (!user)
+    {
+      createErrorPage(req, res, "No users found with specified id", 404)
       return next(new AppError("No users found with specified id", 404));
+      }
+      
 
     req.productsFilter.seller = req.params.sellerId;
   }
@@ -104,11 +114,18 @@ const verifyIfProductForSale = catchAsync(async (req, res, next) => {
   // We use this middleware to check whether a product is still for sale or not.
   const product = await Product.findById(req.params.id);
   if (!product)
+  {
+    createErrorPage(req, res, "No products found with specified id", 404)
     return next(new AppError("No products found with specified id", 404));
+    }
+   
 
   if (!product.forSale)
+  {
+    createErrorPage(req, res, "This product is no longer for sale", 400)
     return next(new AppError("This product is no longer for sale", 400));
-
+    }
+    
   next();
 });
 
@@ -117,9 +134,14 @@ const verifyProductSeller = catchAsync(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product)
+  {
+    createErrorPage(req, res, "No products found with specified id", 404)
     return next(new AppError("No products found with specified id", 404));
+    }
+    
 
   if (req.user._id.equals(product.seller._id)) return next();
+  createErrorPage(req, res, "You are not allowed to perform this action", 401)
   return next(new AppError("You are not allowed to perform this action", 401));
 });
 
@@ -133,7 +155,11 @@ const removeProduct = catchAsync(async (req, res, next) => {
   );
 
   if (!product)
+  {
+    createErrorPage(req, res,"No products found with specified id", 404)
     return next(new AppError("No products found with specified id", 404));
+    }
+    
 
   res.status(200).json({
     status: "success",
@@ -161,7 +187,11 @@ const updateProduct = catchAsync(async (req, res, next) => {
   });
 
   if (!product)
+  {
+    createErrorPage(req, res, "No products found with specified id", 404)
     return next(new AppError("No products found with specified id", 404));
+    }
+    
 
   // Update thumbnail if necessary
   const thumbnail = req.file;
@@ -204,7 +234,11 @@ const getUserProducts = catchAsync(async (req, res, next) => {
   const products = await Product.find({ seller: req.user._id }).lean();
 
   if (!products)
+  {
+    createErrorPage(req, res, "No products found with specified id", 404)
     return next(new AppError("No products found with the specified id", 404));
+    }
+    
 
   //Them
   const features = new APIFeatures(
@@ -230,7 +264,11 @@ const getProduct = catchAsync(async (req, res, next) => {
   var content = null;
   const product = await Product.findById(req.params.id).lean();
   if (!product)
+  {
+    createErrorPage(req, res, "No products found with specified id", 404)
     return next(new AppError("No products found with the specified id", 404));
+    }
+    
   if (req.user == null || !req.user._id.equals(product.seller._id)) {
     content = "detailItem";
   } else {

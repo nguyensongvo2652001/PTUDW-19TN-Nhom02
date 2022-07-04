@@ -1,0 +1,31 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    width: 60rem;
+    margin: auto;
+    align-items: center;
+  }
+  
+  .not-found__header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3.6rem;
+  }
+    
+  .not-found__404 {
+    font-size: 8rem;
+    margin-bottom: 2rem;
+    color: #3F3F3F;
+  }
+  
+  .not-found__title {
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+  
+  .not-found__message {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #495057;
+  }

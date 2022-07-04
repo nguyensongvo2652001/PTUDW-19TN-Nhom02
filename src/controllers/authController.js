@@ -6,6 +6,8 @@ const User = require("../models/userModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
+const createErrorPage = require("../utils/errorFactory")
+
 const { filterObject, createJsonWebToken } = require("../utils/helpers");
 
 const createAndSendToken = async (args) => {
@@ -31,6 +33,7 @@ const createAndSendToken = async (args) => {
 const login = catchAsync(async (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
+    createErrorPage(req,res,"Username and password are required",400)
     return next(new AppError("Username and password are required", 400));
   }
 
@@ -40,6 +43,7 @@ const login = catchAsync(async (req, res, next) => {
     user && (await user.verifyPassword(password, user.password));
 
   if (!correctCredentials) {
+    createErrorPage(req,res,"Incorrect username or password",400)
     return next(new AppError("Incorrect username or password", 400));
   }
 
@@ -69,6 +73,7 @@ const protect = catchAsync(async (req, res, next) => {
   token = token || req.cookies.jwt;
 
   if (!token) {
+    createErrorPage(req,res,"Please log in to perform this action",401)
     return next(new AppError("Please log in to perform this action", 401));
   }
 
@@ -82,7 +87,12 @@ const protect = catchAsync(async (req, res, next) => {
   );
 
   if (!user)
+  {
+    createErrorPage(req, res, "No users found with the specified token", 400)
     return next(new AppError("No users found with the specified token", 400));
+    
+  }
+    
 
   const changedPasswordAfter = user.changedPasswordAfter(
     user.passwordChangedAt,
@@ -90,12 +100,16 @@ const protect = catchAsync(async (req, res, next) => {
   );
 
   if (changedPasswordAfter)
+  {
+    createErrorPage(req, res, "Users with this token already changed their password. Please login again", 400)
     return next(
       new AppError(
         "Users with this token already changed their password. Please login again",
         400
       )
     );
+  }
+    
   req.user = user;
   next();
 });

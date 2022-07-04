@@ -38,9 +38,40 @@
       <li class="header__icon-container">
         <ion-icon
           name="home-outline"
-          class="header__icon header__home-icon"
+          class="header__icon header__icon--inactive header__home-icon"
         ></ion-icon>
       </li>
     </ul>
   </div>
 </header>
+<script>
+  const addFunctionalitiesToHeader = () =>{
+    const headerIcons = document.querySelector(".header__icons")
+    updateHeaderIcon(headerIcons)
+  }
+
+  const updateHeaderIcon = (headerIcons) =>{
+    const url = window.location.href
+    const profileIcon = headerIcons.querySelector(".header__profile-icon")
+    const cartIcon = headerIcons.querySelector(".header__cart-icon")
+    const homeIcon = headerIcons.querySelector(".header__home-icon")
+    if(url.includes("me")){
+        profileIcon.classList.remove("header__icon--inactive")
+        cartIcon.classList.add("header__icon--inactive")
+        homeIcon.classList.add("header__icon--inactive")
+    }
+    else if (url.includes("orders")){
+        profileIcon.classList.add("header__icon--inactive")
+        cartIcon.classList.remove("header__icon--inactive")
+        homeIcon.classList.add("header__icon--inactive")
+    }
+    else {
+        profileIcon.classList.add("header__icon--inactive")
+        cartIcon.classList.add("header__icon--inactive")
+        homeIcon.classList.remove("header__icon--inactive")
+    }
+  }
+
+  addFunctionalitiesToHeader()
+
+</script>

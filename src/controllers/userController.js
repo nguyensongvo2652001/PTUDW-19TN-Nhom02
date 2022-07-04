@@ -5,6 +5,7 @@ const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const { filterObject } = require("../utils/helpers");
+const createErrorPage = require("../utils/errorFactory")
 
 const setCurrentUserId = (req, res, next) => {
   //Use this middleware for route with "/me/..."
@@ -18,6 +19,8 @@ const fileFilter = function (req, file, cb) {
   const fileType = file.mimetype.split("/")[0];
   const { fieldname } = file;
   if (fileType !== "image")
+  {
+    createErrorPage(req, res, "file must be an image. Please try another file", 400)
     return cb(
       new AppError(
         `${fieldname} must be an image. Please try another file`,
@@ -25,6 +28,8 @@ const fileFilter = function (req, file, cb) {
       ),
       false
     );
+  }
+    
   cb(null, true);
 };
 const upload = multer({ storage, fileFilter });
@@ -50,7 +55,10 @@ const getUser = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.params.id).lean();
 
   if (!user)
+  {
+    createErrorPage(req, res, "Can not find the user with specified id", 404)
     return next(new AppError("Can not find the user with specified id", 404));
+    }
   const hasLoggedIn = req.user != null;
   const data = {
     header: "header",

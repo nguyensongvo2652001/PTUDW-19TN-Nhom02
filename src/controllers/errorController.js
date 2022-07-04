@@ -1,4 +1,5 @@
 const AppError = require("../utils/appError");
+const createErrorPage = require("../utils/errorFactory")
 
 const handleErrorDebug = (err, req, res) => {
   res.status(err.statusCode).json({
@@ -21,6 +22,7 @@ const handleDuplicateFieldError = (err) => {
   const message = `Duplicated fields: ${duplicatedFields.join(
     ", "
   )}. Please try another value for these fields`;
+  createErrorPage(req,res,message,400)
   return new AppError(message, 400);
 };
 
@@ -28,10 +30,12 @@ const handleValidationError = (err) => {
   const { errors } = err;
   const errorsMessages = Object.values(errors).map((val) => val.message);
   const message = errorsMessages.join("; ");
+  createErrorPage(req,res,message,400)
   return new AppError(message, 400);
 };
 
 const handleInvalidObjectIdError = (err) => {
+  createErrorPage(req,res,"Invalid id, please try another one",400)
   return new AppError("Invalid id, please try another one", 400);
 };
 
@@ -52,4 +56,17 @@ const errorController = (err, req, res, next) => {
   if (process.env.MODE === "PROD") handleErrorProd(error, req, res);
 };
 
-module.exports = errorController;
+
+const renderErrorPage = (req, res) => {
+  const data = {
+    header: "header",
+    content: "errorPage",
+    message: req.session.error, 
+    errorNumber: req.session.errorNumber,
+    footer: "footer",
+  };
+  res.render("layouts/main", data);
+  req.session.destroy();
+}
+
+module.exports = { errorController, renderErrorPage };
