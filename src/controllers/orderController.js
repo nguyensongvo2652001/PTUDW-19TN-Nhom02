@@ -2,7 +2,7 @@ const { Order, Checkout, OrderedProduct } = require("../models/orderModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const APIFeatures = require("../utils/apiFeatures");
-const createErrorPage = require("../utils/errorFactory")
+const createErrorPage = require("../utils/errorFactory");
 
 const clearOrders = async (order, checkout, orderedProducts) => {
   await Order.findByIdAndDelete(order._id);
@@ -54,7 +54,12 @@ const createOrder = catchAsync(async (req, res, next) => {
 
   if (notForSaleOrderedProducts.length > 0) {
     await clearOrders(order, checkout, orderedProducts);
-    createErrorPage(req,res,"Some of the products you chose are not for sale. Please remove them",400)
+    createErrorPage(
+      req,
+      res,
+      "Some of the products you chose are not for sale. Please remove them",
+      400
+    );
     return next(
       new AppError(
         "Some of the products you chose are not for sale. Please remove them",
@@ -68,7 +73,12 @@ const createOrder = catchAsync(async (req, res, next) => {
 
   if (order.totalPrice > req.user.account) {
     await clearOrders(order, checkout, orderedProducts);
-    createErrorPage(req,res,"You don't have enough money to make this order",400)
+    createErrorPage(
+      req,
+      res,
+      "You don't have enough money to make this order",
+      400
+    );
     return next(
       new AppError("You don't have enough money to make this order", 400)
     );
@@ -77,7 +87,7 @@ const createOrder = catchAsync(async (req, res, next) => {
   req.user.account -= order.totalPrice;
   await req.user.save();
 
-  res.redirect("/api/v1/orders");
+  res.redirect("/api/v1/orders/history");
 });
 
 const getOrdersHistory = catchAsync(async (req, res, next) => {
