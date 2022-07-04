@@ -21,17 +21,22 @@
         <a
           class="nav-link d-flex justify-content-between fw-bold"
           data-bs-toggle="collapse"
-          data-bs-target="#menu_item2"
+          data-bs-target="#add_money_form"
           href="#"
         >
-          Filters
+          Add Money
           <ion-icon name="chevron-down-outline"></ion-icon></a>
-        <ul id="menu_item2" class="submenu collapse">
-          <li><a class="nav-link" href="#">Submenu item 4 </a></li>
-          <li><a class="nav-link" href="#">Submenu item 5 </a></li>
-          <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-          <li><a class="nav-link" href="#">Submenu item 6 </a></li>
-        </ul>
+       <form id="add_money_form" class="collapse">
+        <label for="account" class="form-label"> Amount </label>
+        <input
+          type="number"
+          class="mb-5 form-control"
+          id="account"
+          name="account"
+          value=""
+        />
+        <button  class="btn btn--black applyMoneyButton">Accept</button>
+      </form>
       </li>
       <li class="nav-item">
         <a
@@ -134,7 +139,13 @@
       } catch {
         console.log("error")
       }
+
 };
+const applyMoneyButton = document.querySelector(".applyMoneyButton")
+applyMoneyButton.addEventListener("click",()=>{
+  redirect("api/v1/products")
+})
+
 
   
 </script>

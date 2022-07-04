@@ -37,7 +37,6 @@ const upload = multer({ storage, fileFilter });
 const uploadAvatar = upload.single("avatar");
 
 const resizeAndStoreAvatar = catchAsync(async (req, res, next) => {
-  console.log(req.file);
 
   if (!req.file) return next();
   const avatar = req.file.buffer;
@@ -81,7 +80,6 @@ const updateMe = catchAsync(async (req, res, next) => {
       "description",
     ],
   });
-
   const user = await User.findByIdAndUpdate(req.user.id, req.body, {
     new: true,
     runValidators: true,
@@ -93,10 +91,26 @@ const updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
+
+const updateAccount = catchAsync(async (req, res, next) => {
+  const userInput = filterObject(req.body, {
+    whiteList: ["account"],
+  });
+  const user = await User.findById(req.user._id).lean()
+  oldAccount = user.account || 0
+  newAccount = Number(oldAccount) + Number(userInput.account)
+  result = Number(newAccount)
+  const filter = { _id: req.user._id};
+  const update = { account: result };
+  let userUpdated = await User.findOneAndUpdate(filter, update);
+  
+})
+
 module.exports = {
   setCurrentUserId,
   uploadAvatar,
   resizeAndStoreAvatar,
   updateMe,
   getUser,
+  updateAccount
 };
