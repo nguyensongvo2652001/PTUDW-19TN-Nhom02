@@ -109,10 +109,12 @@ const updateAccount = catchAsync(async (req, res, next) => {
 const bufferAccount = catchAsync(async (req, res, next) => {
   const amount = req.params.amount;
   const user = await User.findById(req.user._id).lean();
+  console.log(user);
   let userUpdated = await User.findOneAndUpdate(
     { _id: user._id },
-    { account: user.account + amount }
+    { $inc: { account: amount } }
   );
+  res.redirect("/api/v1/products");
 });
 
 module.exports = {

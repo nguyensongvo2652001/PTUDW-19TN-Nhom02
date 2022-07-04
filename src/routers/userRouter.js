@@ -62,6 +62,7 @@ router
 
 router
   .route("/me/transfer/:amount")
+  .get(authController.protect, userController.bufferAccount)
   .post(authController.protect, userController.bufferAccount);
 
 router.use("/:sellerId/products", productRouter);
