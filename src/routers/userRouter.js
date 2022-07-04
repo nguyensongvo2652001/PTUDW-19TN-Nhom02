@@ -54,17 +54,16 @@ router
     authController.protect,
     productController.getStatistics,
     authController.redirect
-);
+  );
 
 router
   .route("/me/transfer")
-  .post(
-    authController.protect,
-    userController.updateAccount,
-  )
+  .post(authController.protect, userController.updateAccount);
 
+router
+  .route("/me/transfer/:amount")
+  .post(authController.protect, userController.bufferAccount);
 
 router.use("/:sellerId/products", productRouter);
-
 
 module.exports = router;
