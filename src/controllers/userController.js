@@ -5,7 +5,7 @@ const User = require("../models/userModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const { filterObject } = require("../utils/helpers");
-const createErrorPage = require("../utils/errorFactory")
+const createErrorPage = require("../utils/errorFactory");
 
 const setCurrentUserId = (req, res, next) => {
   //Use this middleware for route with "/me/..."
@@ -18,9 +18,13 @@ const storage = multer.memoryStorage();
 const fileFilter = function (req, file, cb) {
   const fileType = file.mimetype.split("/")[0];
   const { fieldname } = file;
-  if (fileType !== "image")
-  {
-    createErrorPage(req, res, "file must be an image. Please try another file", 400)
+  if (fileType !== "image") {
+    createErrorPage(
+      req,
+      res,
+      "file must be an image. Please try another file",
+      400
+    );
     return cb(
       new AppError(
         `${fieldname} must be an image. Please try another file`,
@@ -29,7 +33,7 @@ const fileFilter = function (req, file, cb) {
       false
     );
   }
-    
+
   cb(null, true);
 };
 const upload = multer({ storage, fileFilter });
@@ -37,7 +41,6 @@ const upload = multer({ storage, fileFilter });
 const uploadAvatar = upload.single("avatar");
 
 const resizeAndStoreAvatar = catchAsync(async (req, res, next) => {
-
   if (!req.file) return next();
   const avatar = req.file.buffer;
   if (!avatar) return next();
@@ -53,11 +56,10 @@ const resizeAndStoreAvatar = catchAsync(async (req, res, next) => {
 const getUser = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.params.id).lean();
 
-  if (!user)
-  {
-    createErrorPage(req, res, "Can not find the user with specified id", 404)
+  if (!user) {
+    createErrorPage(req, res, "Can not find the user with specified id", 404);
     return next(new AppError("Can not find the user with specified id", 404));
-    }
+  }
   const hasLoggedIn = req.user != null;
   const data = {
     header: "header",
@@ -91,20 +93,27 @@ const updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
-
 const updateAccount = catchAsync(async (req, res, next) => {
   const userInput = filterObject(req.body, {
     whiteList: ["account"],
   });
-  const user = await User.findById(req.user._id).lean()
-  oldAccount = user.account || 0
-  newAccount = Number(oldAccount) + Number(userInput.account)
-  result = Number(newAccount)
-  const filter = { _id: req.user._id};
+  const user = await User.findById(req.user._id).lean();
+  oldAccount = user.account || 0;
+  newAccount = Number(oldAccount) + Number(userInput.account);
+  result = Number(newAccount);
+  const filter = { _id: req.user._id };
   const update = { account: result };
   let userUpdated = await User.findOneAndUpdate(filter, update);
-  
-})
+});
+
+const bufferAccount = catchAsync(async (req, res, next) => {
+  const amount = req.params.amount;
+  const user = await User.findById(req.user._id).lean();
+  let userUpdated = await User.findOneAndUpdate(
+    { _id: user._id },
+    { account: user.account + amount }
+  );
+});
 
 module.exports = {
   setCurrentUserId,
@@ -112,5 +121,5 @@ module.exports = {
   resizeAndStoreAvatar,
   updateMe,
   getUser,
-  updateAccount
+  updateAccount,
 };
