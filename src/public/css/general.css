@@ -9,6 +9,9 @@ body {
   font-weight: 400;
   min-height: 100%;
 }
+.padding--only {
+  margin-bottom: 200px;
+}
 
 .header-tertiary {
   margin-bottom: 1.5rem;
